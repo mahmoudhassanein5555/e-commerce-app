@@ -16,10 +16,10 @@ class AppSection extends StatefulWidget {
 
 class _AppSectionState extends State<AppSection> {
   List<Widget> widgetList = [
-    HomeScreen(),
-    CartScreen(),
-    FavoriteScreen(),
-    ProfileScreen(),
+    const HomeScreen(),
+    const CartScreen(),
+    const FavoriteScreen(),
+    const ProfileScreen(),
   ];
 
   int index = 0;
@@ -34,12 +34,12 @@ class _AppSectionState extends State<AppSection> {
         unselectedItemColor: const Color(0xff5C5C5C),
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: true,
-        selectedLabelStyle: TextStyle(
+        selectedLabelStyle: const TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 16,
           color: Color(0xff212121),
         ),
-        unselectedLabelStyle: TextStyle(
+        unselectedLabelStyle: const TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 15,
           color: Color(0xff5C5C5C),
@@ -56,7 +56,7 @@ class _AppSectionState extends State<AppSection> {
               height: 23,
               width: 23,
               fit: BoxFit.cover,
-              color: index == 0 ? Color(0xff212121) : Color(0xff5C5C5C),
+              color: index == 0 ? const Color(0xff212121) : const Color(0xff5C5C5C),
             ),
             label: 'Home',
           ),
@@ -66,7 +66,7 @@ class _AppSectionState extends State<AppSection> {
               height: 23,
               width: 23,
               fit: BoxFit.cover,
-              color: index == 1 ? Color(0xff212121) : Color(0xff5C5C5C),
+              color: index == 1 ? const Color(0xff212121) : const Color(0xff5C5C5C),
             ),
             label: 'Cart',
           ),
@@ -76,7 +76,7 @@ class _AppSectionState extends State<AppSection> {
               height: 23,
               width: 23,
               fit: BoxFit.cover,
-              color: index == 2 ? Color(0xff212121) : Color(0xff5C5C5C),
+              color: index == 2 ? const Color(0xff212121) : const Color(0xff5C5C5C),
             ),
             label: ' Favorite',
           ),
@@ -86,7 +86,7 @@ class _AppSectionState extends State<AppSection> {
               height: 23,
               width: 23,
               fit: BoxFit.cover,
-              color: index == 3 ? Color(0xff212121) : Color(0xff5C5C5C),
+              color: index == 3 ? const Color(0xff212121) : const Color(0xff5C5C5C),
             ),
             label: 'Profile',
           ),

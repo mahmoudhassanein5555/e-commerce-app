@@ -1,7 +1,7 @@
 
 import 'package:e_commerce_app/core/common/widget/custom_form_text_fiel.dart';
 import 'package:e_commerce_app/core/utils/validator_functions.dart';
-import 'package:e_commerce_app/feature/auth/view/register_screen.dart';
+import 'package:e_commerce_app/feature/auth/register/presentation/view/register_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Login",
           style: TextStyle(
             fontSize: 25,
@@ -36,12 +36,12 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 30),
-            Text(
+            const SizedBox(height: 30),
+            const Text(
               "Email",
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             CustomTextFormField(
               controller: emailController,
               validator: Validator.validateEmail,
@@ -49,12 +49,12 @@ class _LoginScreenState extends State<LoginScreen> {
               keyboardType: TextInputType.emailAddress,
               action: TextInputAction.next,
             ),
-            SizedBox(height: 30),
-            Text(
+            const SizedBox(height: 30),
+            const Text(
               "Password",
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             CustomTextFormField(
               controller: passwordController,
               validator: Validator.validatePassword,
@@ -63,16 +63,16 @@ class _LoginScreenState extends State<LoginScreen> {
               keyboardType: TextInputType.emailAddress,
               action: TextInputAction.next,
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             MaterialButton(
               minWidth: double.infinity,
               height: 50,
               onPressed: () {
                 if (formKey.currentState!.validate()) {}
               },
-              color: Color(0xff212121),
+              color: const Color(0xff212121),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              child: Text(
+              child: const Text(
                 "Login",
                 style: TextStyle(
                   fontSize: 16,
@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Text.rich(
                 TextSpan(
                   text: "Don't have an account? ",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: Color(0xff6E6A7C),
                   ),
@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ..onTap = () {
                       Navigator.of(context).pushNamed(RegisterScreen.routeName);
                     },
-                  children: [
+                  children: const [
                     TextSpan(
                       text: "Sign Up",
                       style: TextStyle(

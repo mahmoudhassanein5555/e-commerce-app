@@ -12,13 +12,40 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../feature/auth/register/data/api/register_api.dart' as _i361;
+import '../../feature/auth/register/data/repositories/data_source/register_data_source_imp.dart'
+    as _i334;
+import '../../feature/auth/register/data/repositories/repo/register_repo_imp.dart'
+    as _i508;
+import '../../feature/auth/register/domain/repositories/data_source/register_data_source.dart'
+    as _i458;
+import '../../feature/auth/register/domain/repositories/repo/register_repo.dart'
+    as _i582;
+import '../../feature/auth/register/domain/use_case/register_use_case.dart'
+    as _i200;
+import '../../feature/auth/register/presentation/view_model/home_cubit/register_cubit.dart'
+    as _i377;
+
 extension GetItInjectableX on _i174.GetIt {
-  // initializes the registration of main-scope dependencies inside of GetIt
+// initializes the registration of main-scope dependencies inside of GetIt
   _i174.GetIt init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
   }) {
-    _i526.GetItHelper(this, environment, environmentFilter);
+    final gh = _i526.GetItHelper(
+      this,
+      environment,
+      environmentFilter,
+    );
+    gh.factory<_i361.RegisterApi>(() => _i361.RegisterApi());
+    gh.factory<_i458.RegisterDataSource>(
+        () => _i334.RegisterDataSourceImp(gh<_i361.RegisterApi>()));
+    gh.factory<_i582.RegisterRepo>(
+        () => _i508.RegisterRepoImp(gh<_i458.RegisterDataSource>()));
+    gh.factory<_i200.RegisterUseCase>(
+        () => _i200.RegisterUseCase(gh<_i582.RegisterRepo>()));
+    gh.factory<_i377.RegisterCubit>(
+        () => _i377.RegisterCubit(gh<_i200.RegisterUseCase>()));
     return this;
   }
 }

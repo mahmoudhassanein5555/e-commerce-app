@@ -64,7 +64,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       textInputAction: widget.action ?? TextInputAction.next,
       focusNode: widget.focusNode,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 16,
         // color: AppColor.primary,
         fontWeight: FontWeight.w500,
@@ -75,7 +75,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         fillColor: Colors.transparent,
         filled: true,
         hintText: widget.hintText,
-        hintStyle: TextStyle(
+        hintStyle: const TextStyle(
           fontSize: 16,
           // color: AppColor.gray,
           fontWeight: FontWeight.w500,

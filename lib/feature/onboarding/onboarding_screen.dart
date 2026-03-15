@@ -50,13 +50,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   itemCount: onboardingList.length,
                 ),
               ),
-              SizedBox(height: 35),
+              const SizedBox(height: 35),
               //! indicator onboarding
               SmoothPageIndicator(
                 controller: controller,
                 count: onboardingList.length,
                 axisDirection: Axis.horizontal,
-                effect: ExpandingDotsEffect(
+                effect: const ExpandingDotsEffect(
                   dotWidth: 10,
                   dotHeight: 10,
                   dotColor: Color(0xffAFAFAF),
@@ -64,27 +64,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
               //! title onboarding and description onboarding
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               CustomAnimatedWidget(
                 delay: (index + 1) * 100,
                 index: index,
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 40),
+                  margin: const EdgeInsets.symmetric(horizontal: 40),
                   width: double.infinity,
                   child: Column(
                     children: [
                       Text(
                         onboardingList[index].title,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
                           color: Color(0xff24252C),
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Text(
                         onboardingList[index].description,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
                           color: Color(0xff6E6A7C),
@@ -95,7 +95,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 100),
+              const SizedBox(height: 100),
               //! button next onboarding
               MaterialButton(
                 minWidth: double.infinity,
@@ -103,18 +103,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 onPressed: () {
                   if (index < onboardingList.length - 1) {
                     controller.nextPage(
-                      duration: Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 500),
                       curve: Curves.easeIn,
                     );
                   } else {
                     Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
                   }
                 },
-                color: Color(0xff212121),
+                color: const Color(0xff212121),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 child: Text(
                   index < onboardingList.length - 1 ? "Next" : "Get Started",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: Color(0xffFFFFFF),

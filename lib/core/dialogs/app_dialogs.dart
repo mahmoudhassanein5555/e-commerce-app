@@ -7,16 +7,16 @@ abstract class AppDialogs {
       context: context,
       barrierDismissible: false,
       builder: (context) {
-        return PopScope(
+        return const PopScope(
           child: AlertDialog(
             backgroundColor: Colors.white,
             content: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const CircularProgressIndicator(
+                CircularProgressIndicator(
                   color: Colors.black,
                 ),
-                const SizedBox(width: 16),
+                SizedBox(width: 16),
                 Text(
                   'Loading...',
                   style: TextStyle(
