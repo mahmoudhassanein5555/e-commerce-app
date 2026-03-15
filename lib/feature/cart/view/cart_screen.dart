@@ -5,7 +5,7 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
@@ -40,7 +40,7 @@ class CartBodyWidget extends StatelessWidget {
             child: ListView.separated(
               itemBuilder: (context, index) => Container(
                 decoration: BoxDecoration(
-                  color: Color(0xffF4F4F4),
+                  color: const Color(0xffF4F4F4),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
@@ -53,8 +53,8 @@ class CartBodyWidget extends StatelessWidget {
                         height: 100,
                       ),
                     ),
-                    SizedBox(width: 10),
-                    Column(
+                    const SizedBox(width: 10),
+                    const Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -76,13 +76,13 @@ class CartBodyWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         IconButton(
                           onPressed: () {},
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.cancel_outlined,
                             size: 30,
                             color: Color(0xff212121),
@@ -90,7 +90,7 @@ class CartBodyWidget extends StatelessWidget {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            color: Color(0xffF4F4F4),
+                            color: const Color(0xffF4F4F4),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Row(
@@ -99,12 +99,12 @@ class CartBodyWidget extends StatelessWidget {
                             children: [
                               IconButton(
                                 onPressed: () {},
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.remove_circle_outline,
                                   color: Color(0xff212121),
                                 ),
                               ),
-                              Text(
+                              const Text(
                                 "1",
                                 style: TextStyle(
                                   fontSize: 16,
@@ -114,7 +114,7 @@ class CartBodyWidget extends StatelessWidget {
                               ),
                               IconButton(
                                 onPressed: () {},
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.add_circle_outline,
                                   color: Color(0xff212121),
                                 ),
@@ -139,8 +139,8 @@ class CartBodyWidget extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  SizedBox(height: 20),
-                  Row(
+                  const SizedBox(height: 20),
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -161,15 +161,15 @@ class CartBodyWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Divider(),
+                  const Divider(),
                   MaterialButton(
                     minWidth: double.infinity,
                     height: 50,
                     onPressed: () {},
-                    color: Color(0xff212121),
+                    color: const Color(0xff212121),
                     shape:
                         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    child: Text(
+                    child: const Text(
                       "Checkout",
                       style: TextStyle(
                         fontSize: 16,
@@ -207,7 +207,7 @@ class EmptyScreen extends StatelessWidget {
           Text(
             description,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w500,
               color: Color(0xff5C5C5C),
