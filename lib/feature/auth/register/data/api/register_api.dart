@@ -14,7 +14,6 @@ class RegisterApi {
       Uri url = Uri.https(AppApis.baseUrl, AppApis.register);
       var response = await http.post(url, body: request.toJson());
       if (response.statusCode >= 200 && response.statusCode < 300) {
-        
         var responseBody = response.body;
         var json = jsonDecode(responseBody);
         return SuccessAPI<RegisterResponseDto>(
