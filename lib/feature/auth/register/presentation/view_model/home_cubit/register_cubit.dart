@@ -25,7 +25,6 @@ class RegisterCubit extends Cubit<RegisterState> {
         emit(RegisterSuccess(result.data ?? RegisterResponseEntity()));
       case ErrorAPI<RegisterResponseEntity>():
         emit(RegisterError(result.messageError));
-      
     }
   }
 }

@@ -19,7 +19,6 @@ class RegisterDataSourceImp implements RegisterDataSource {
     switch (result) {
       case SuccessAPI<RegisterResponseDto>():
         return SuccessAPI<RegisterResponseEntity>(result.data?.toEntity());
-
       case ErrorAPI<RegisterResponseDto>():
         return ErrorAPI<RegisterResponseEntity>(result.messageError);
     }

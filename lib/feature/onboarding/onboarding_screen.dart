@@ -1,5 +1,5 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:e_commerce_app/feature/auth/view/login_screen.dart';
+import 'package:e_commerce_app/feature/auth/login/presentation/view/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
