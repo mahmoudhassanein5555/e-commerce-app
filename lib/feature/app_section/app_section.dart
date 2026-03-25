@@ -1,7 +1,6 @@
-
 import 'package:e_commerce_app/feature/cart/view/cart_screen.dart';
 import 'package:e_commerce_app/feature/favorite/view/favorite_screen.dart';
-import 'package:e_commerce_app/feature/home/view/home_screen.dart';
+import 'package:e_commerce_app/feature/home/presentation/view/home_screen.dart';
 import 'package:e_commerce_app/feature/profile/view/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,7 +15,7 @@ class AppSection extends StatefulWidget {
 
 class _AppSectionState extends State<AppSection> {
   List<Widget> widgetList = [
-    const HomeScreen(),
+    HomeScreen(),
     const CartScreen(),
     const FavoriteScreen(),
     const ProfileScreen(),
@@ -46,8 +45,9 @@ class _AppSectionState extends State<AppSection> {
         ),
         currentIndex: index,
         onTap: (selectedIndex) {
-          index = selectedIndex;
-          setState(() {});
+          setState(() {
+            index = selectedIndex;
+          });
         },
         items: [
           BottomNavigationBarItem(
@@ -56,7 +56,9 @@ class _AppSectionState extends State<AppSection> {
               height: 23,
               width: 23,
               fit: BoxFit.cover,
-              color: index == 0 ? const Color(0xff212121) : const Color(0xff5C5C5C),
+              color: index == 0
+                  ? const Color(0xff212121)
+                  : const Color(0xff5C5C5C),
             ),
             label: 'Home',
           ),
@@ -66,7 +68,9 @@ class _AppSectionState extends State<AppSection> {
               height: 23,
               width: 23,
               fit: BoxFit.cover,
-              color: index == 1 ? const Color(0xff212121) : const Color(0xff5C5C5C),
+              color: index == 1
+                  ? const Color(0xff212121)
+                  : const Color(0xff5C5C5C),
             ),
             label: 'Cart',
           ),
@@ -76,7 +80,9 @@ class _AppSectionState extends State<AppSection> {
               height: 23,
               width: 23,
               fit: BoxFit.cover,
-              color: index == 2 ? const Color(0xff212121) : const Color(0xff5C5C5C),
+              color: index == 2
+                  ? const Color(0xff212121)
+                  : const Color(0xff5C5C5C),
             ),
             label: ' Favorite',
           ),
@@ -86,7 +92,9 @@ class _AppSectionState extends State<AppSection> {
               height: 23,
               width: 23,
               fit: BoxFit.cover,
-              color: index == 3 ? const Color(0xff212121) : const Color(0xff5C5C5C),
+              color: index == 3
+                  ? const Color(0xff212121)
+                  : const Color(0xff5C5C5C),
             ),
             label: 'Profile',
           ),

@@ -21,7 +21,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Ecommerce App",
-      initialRoute: RegisterScreen.routeName,
+      // initialRoute: RegisterScreen.routeName,
+      initialRoute: AppSection.routeName,
       routes: {
         OnboardingScreen.routeName: (context) => const OnboardingScreen(),
         LoginScreen.routeName: (context) => BlocProvider(
