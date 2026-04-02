@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/core/di/service_locator.dart';
+import 'package:e_commerce_app/feature/details/presentation/view/product_details_screen.dart';
 import 'package:e_commerce_app/feature/home/domain/entites/category_response_entity.dart';
 import 'package:e_commerce_app/feature/home/domain/entites/product_response_entity.dart';
 import 'package:e_commerce_app/feature/home/presentation/view_model/home_cubit/home_cubit.dart';
@@ -126,7 +127,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
-                      return ProductItemWidget(product: state.products[index]);
+                      return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProductDetailsScreen(
+                                          productId: state.products[index].id,
+                                        )));
+                          },
+                          child: ProductItemWidget(
+                              product: state.products[index]));
                     },
                     childCount: state.products.length,
                   ),

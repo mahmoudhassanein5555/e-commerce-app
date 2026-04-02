@@ -1,0 +1,207 @@
+import 'package:dots_indicator/dots_indicator.dart';
+import 'package:e_commerce_app/core/di/service_locator.dart';
+import 'package:e_commerce_app/feature/details/presentation/view_model/home_cubit/product_details_cubit.dart';
+import 'package:e_commerce_app/feature/details/presentation/view_model/home_cubit/product_details_state.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+
+class ProductDetailsScreen extends StatefulWidget {
+  ProductDetailsScreen({super.key, required this.productId});
+  int productId = 1;
+
+  @override
+  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
+}
+
+class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  late final ProductDetailsCubit _productDetailsCubit;
+  @override
+  void initState() {
+    super.initState();
+    _productDetailsCubit = getIt<ProductDetailsCubit>();
+    _productDetailsCubit.intent(GetProductDetails(productId: widget.productId));
+  }
+
+  int currentIndex = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xff212121)),
+                child: const Padding(
+                  padding: EdgeInsets.only(top: 15, bottom: 15),
+                  child: Text(
+                    "Add to cart",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                )),
+          ),
+        ),
+        appBar: AppBar(
+          title: const Text('Product Details'),
+          centerTitle: true,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
+            bloc: _productDetailsCubit,
+            builder: (context, state) {
+              if (state is GetProductsDetailsSuccess) {
+                return SingleChildScrollView(
+                  child: Column(spacing: 10, children: [
+                    SizedBox(
+                        height: 331,
+                        width: double.infinity,
+                        child: Card(
+                          elevation: 10,
+                          child: PageView.builder(
+                            itemCount: state.productDetails.images.length,
+                            onPageChanged: (value) {
+                              setState(() {
+                                currentIndex = value;
+                              });
+                            },
+                            itemBuilder: (context, index) => Image.network(
+                                state.productDetails.images[index]),
+                          ),
+                        )),
+                    DotsIndicator(
+                      dotsCount: state.productDetails.images.length,
+                      position: currentIndex.toDouble(),
+                      decorator: DotsDecorator(
+                        activeColor: Colors.teal,
+                        size: const Size.square(9.0),
+                        activeSize: const Size(18.0, 9.0),
+                        activeShape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0)),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        FittedBox(
+                          child: Text(
+                            state.productDetails.title,
+                            style: const TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const Spacer(),
+                        Text(
+                          "EGP ${state.productDetails.price}",
+                          style: const TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      state.productDetails.description,
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                    const SizedBox(
+                      height: 80,
+                    ),
+                  ]),
+                );
+              } else if (state is ProductDetailsError) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.error_outline,
+                          color: Colors.red, size: 60),
+                      const SizedBox(height: 16),
+                      Text(
+                        state.message, 
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          context
+                              .read<ProductDetailsCubit>()
+                              .getProductDetails(widget.productId);
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.teal),
+                        child: const Text("Try Again",
+                            style: TextStyle(color: Colors.white)),
+                      ),
+                    ],
+                  ),
+                );
+              } else {
+                return Skeletonizer(
+                    enabled: true,
+                    enableSwitchAnimation: true,
+                    child: SingleChildScrollView(
+                      child: Column(spacing: 10, children: [
+                        SizedBox(
+                            height: 331,
+                            width: double.infinity,
+                            child: Card(
+                              elevation: 10,
+                              child: PageView.builder(
+                                  itemCount: 3,
+                                  onPageChanged: (value) {
+                                    setState(() {
+                                      currentIndex = value;
+                                    });
+                                  },
+                                  itemBuilder: (context, index) {
+                                    return Container();
+                                  }),
+                            )),
+                        DotsIndicator(
+                          dotsCount: 3,
+                          position: currentIndex.toDouble(),
+                          decorator: DotsDecorator(
+                            activeColor: Colors.teal,
+                            size: const Size.square(9.0),
+                            activeSize: const Size(18.0, 9.0),
+                            activeShape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0)),
+                          ),
+                        ),
+                        const Row(
+                          children: [
+                            Text(
+                              "T_shirt",
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.bold),
+                            ),
+                            Spacer(),
+                            Text(
+                              "EGP 100",
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        const Text(
+                          "Elevate your casual wardrobe with our Classic Red Pullover Hoodie. Crafted with a soft cotton blend for ultimate comfort, this vibrant red hoodie features a kangaroo pocket, adjustable drawstring hood, and ribbed cuffs for a snug fit. The timeless design ensures easy pairing with jeans or joggers for a relaxed yet stylish look, making it a versatile addition to your everyday attire",
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        const SizedBox(
+                          height: 80,
+                        ),
+                      ]),
+                    ));
+              }
+            },
+          ),
+        ));
+  }
+}
