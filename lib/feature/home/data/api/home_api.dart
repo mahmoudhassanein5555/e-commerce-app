@@ -36,7 +36,7 @@ class HomeApi {
       int categoryId) async {
     try {
       Uri url = Uri.https(AppApis.baseUrl,
-          "${AppApis.categories}$categoryId${AppApis.getProducts}");
+          "${AppApis.categories}$categoryId${AppApis.productsForEachCategory}");
       var response = await http.get(url);
       if (response.statusCode >= 200 && response.statusCode < 300) {
         List<dynamic> jsonList = jsonDecode(response.body);
