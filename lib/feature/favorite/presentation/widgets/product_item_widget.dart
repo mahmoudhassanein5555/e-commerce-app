@@ -1,11 +1,6 @@
-import 'package:e_commerce_app/feature/details/presentation/view/product_details_screen.dart';
-import 'package:e_commerce_app/feature/favorite/domain/entites/product_favorite_entity.dart';
-import 'package:e_commerce_app/feature/favorite/presentation/view_model/home_cubit/product_favorite_cubit.dart';
-import 'package:e_commerce_app/feature/favorite/presentation/view_model/home_cubit/product_favorite_state.dart';
 import 'package:e_commerce_app/feature/home/domain/entites/product_response_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marquee/marquee.dart';
 
 class ProductItemWidget extends StatefulWidget {
@@ -39,41 +34,22 @@ class _ProductItemWidgetState extends State<ProductItemWidget> {
                 fit: BoxFit.fill,
               ),
               Positioned(
-                top: 3,
-                right: 5,
-                child: BlocBuilder<FavoriteCubit, FavoriteState>(
-                  builder: (context, state) {
-                    final cubit = context.read<FavoriteCubit>();
-
-                    bool isFav = cubit.favoritesList
-                        .any((e) => e.title == widget.product.title);
-
-                    return IconButton(
+                  top: 3,
+                  right: 5,
+                  child: IconButton(
                       onPressed: () {
-                        cubit.toggleFavorite(
-                          ProductFavoriteEntity(
-                            title: widget.product.title ?? '',
-                            image: (widget.product.images != null &&
-                                    widget.product.images!.isNotEmpty)
-                                ? widget.product.images![0]
-                                : "https://via.placeholder.com/150",
-                            price: widget.product.price.toInt(),
-                          ),
-                        );
+                        isFavorite = !isFavorite;
+                        setState(() {});
                       },
                       icon: Icon(
-                        isFav
+                        isFavorite == true
                             ? Icons.favorite_outlined
                             : Icons.favorite_border_outlined,
                         size: 30,
-                        color: isFav
+                        color: isFavorite == true
                             ? const Color.fromARGB(255, 171, 18, 7)
                             : const Color.fromARGB(255, 62, 61, 61),
-                      ),
-                    );
-                  },
-                ),
-              ),
+                      ))),
             ],
           ),
         ),

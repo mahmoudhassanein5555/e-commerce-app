@@ -12,7 +12,7 @@ dependencies:
   cupertino_icons: ^1.0.8
 
   # Dependency Injection
-  get_it: ^7.7.0 # تحديث من 3.0.3 (قديمة جداً)
+  get_it: ^7.7.0
   injectable: ^2.5.0
 
   # Networking & Data
@@ -29,29 +29,31 @@ dependencies:
   toastification: ^2.0.0
   responsive_builder: ^0.7.1
 
-  # State Management (يفضل استخدام Provider الحديث أو Bloc)
-  provider: ^6.1.2 # تحديث من 3.2.0
+  # State Management
+  provider: ^6.1.2
 
   # Utils
   logger: ^2.4.0
   bloc: ^9.2.0
   flutter_bloc: ^9.1.1
   cached_network_image: ^3.4.1
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
   marquee: ^2.3.0
   dots_indicator: ^4.0.1
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0 # تحديث ليتوافق مع المعايير الحالية
-  build_runner: ^2.13.1
+  flutter_lints: ^3.0.0
   injectable_generator: ^2.6.2
+
+  # 👇 دول المهمين للـ Hive
+  build_runner: ^2.4.6
+  hive_generator: ^2.0.1
 
 flutter:
   uses-material-design: true
-  # أضف مسارات الصور هنا لو محتاجها
   assets:
     - assets/icons/
     - assets/image/

@@ -1,5 +1,5 @@
 import 'package:e_commerce_app/feature/cart/view/cart_screen.dart';
-import 'package:e_commerce_app/feature/favorite/view/favorite_screen.dart';
+import 'package:e_commerce_app/feature/favorite/presentation/view/empty_favorite_screen.dart';
 import 'package:e_commerce_app/feature/home/presentation/view/home_screen.dart';
 import 'package:e_commerce_app/feature/profile/view/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,8 @@ class _AppSectionState extends State<AppSection> {
   List<Widget> widgetList = [
     HomeScreen(),
     const CartScreen(),
-    const FavoriteScreen(),
+    //EmptyFavoriteScreen(),
+    const ProfileScreen(),
     const ProfileScreen(),
   ];
 
