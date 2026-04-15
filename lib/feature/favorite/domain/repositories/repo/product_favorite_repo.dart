@@ -3,7 +3,7 @@ import 'package:e_commerce_app/feature/favorite/domain/entites/product_favorite_
 abstract class ProductFavoriteRepo {
   Future<void> addToFavorite(ProductFavoriteEntity product);
 
-  Future<void> removeFromFavorite(int title);
+  Future<void> removeFromFavorite(String title);
 
   Future<List<ProductFavoriteEntity>> getFavorites();
 }

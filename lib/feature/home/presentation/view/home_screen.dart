@@ -121,23 +121,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 return SliverGrid(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 0.7,
+                    childAspectRatio: 0.58,
                     crossAxisSpacing: 30,
                     mainAxisSpacing: 20,
                   ),
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
-                      return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ProductDetailsScreen(
-                                          productId: state.products[index].id,
-                                        )));
-                          },
-                          child: ProductItemWidget(
-                              product: state.products[index]));
+                      final product = state.products[index];
+                      return ProductItemWidget(
+                        product: product,
+                        onProductTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProductDetailsScreen(
+                                productId: product.id,
+                              ),
+                            ),
+                          );
+                        },
+                      );
                     },
                     childCount: state.products.length,
                   ),
@@ -157,12 +160,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          childAspectRatio: 0.7,
+                          childAspectRatio: 0.58,
                         ),
                         itemCount: 10,
                         itemBuilder: (BuildContext context, int index) {
                           return ProductItemWidget(
-                              product: ProductsResponseEntity());
+                            product: ProductsResponseEntity(),
+                            onProductTap: () {},
+                          );
                         },
                       ),
                     ),

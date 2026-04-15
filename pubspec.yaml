@@ -46,11 +46,14 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
-  injectable_generator: ^2.6.2
+  injectable_generator: ^2.10.0
 
-  # 👇 دول المهمين للـ Hive
-  build_runner: ^2.4.6
-  hive_generator: ^2.0.1
+  # Codegen: hive_generator_io works with current build_runner / analyzer (hive_generator is unmaintained).
+  # Regenerate: flutter pub run build_runner build --delete-conflicting-outputs --force-aot
+  # (or: dart run build_runner ...). --force-aot avoids missing `frontend_server.dart.snapshot` on Dart 3.11+.
+  build_runner: ^2.4.15
+  frontend_server_client: ^4.0.0
+  hive_generator_io: ^3.2.2
 
 flutter:
   uses-material-design: true

@@ -1,9 +1,11 @@
 import 'package:e_commerce_app/feature/favorite/domain/entites/product_favorite_entity.dart';
 import 'package:e_commerce_app/feature/favorite/domain/repositories/repo/product_favorite_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 import 'product_favorite_state.dart';
 
+@injectable
 class FavoriteCubit extends Cubit<FavoriteState> {
   final ProductFavoriteRepo repo;
 
@@ -27,7 +29,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
 
     try {
       if (isExist) {
-        await repo.removeFromFavorite(product.title.hashCode);
+        await repo.removeFromFavorite(product.title);
         favoritesList.removeWhere((element) => element.title == product.title);
       } else {
         await repo.addToFavorite(product);
@@ -36,13 +38,13 @@ class FavoriteCubit extends Cubit<FavoriteState> {
 
       emit(FavoriteSuccess(List.from(favoritesList)));
     } catch (e) {
-      emit(FavoriteError("عطل في تحديث المفضلة"));
+      emit(FavoriteError("Error toggling favorite: ${e.toString()}"));
     }
   }
 
   Future<void> removeItem(String title) async {
     try {
-      await repo.removeFromFavorite(title.hashCode);
+      await repo.removeFromFavorite(title);
       favoritesList.removeWhere((element) => element.title == title);
       emit(FavoriteSuccess(List.from(favoritesList)));
     } catch (e) {

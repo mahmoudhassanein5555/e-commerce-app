@@ -4,7 +4,7 @@ class RemoveFromFavoriteUseCase {
   final ProductFavoriteRepo repository;
   RemoveFromFavoriteUseCase(this.repository);
 
-  Future<void> call(int id) async {
-    return await repository.removeFromFavorite(id);
+  Future<void> call(String title) async {
+    return await repository.removeFromFavorite(title);
   }
 }
