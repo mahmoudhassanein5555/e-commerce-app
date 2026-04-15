@@ -1,8 +1,10 @@
+import 'package:e_commerce_app/feature/app_section/main_tab_cubit.dart';
 import 'package:e_commerce_app/feature/cart/view/cart_screen.dart';
-import 'package:e_commerce_app/feature/favorite/view/favorite_screen.dart';
+import 'package:e_commerce_app/feature/favorite/presentation/view/product_favorite_screen.dart';
 import 'package:e_commerce_app/feature/home/presentation/view/home_screen.dart';
 import 'package:e_commerce_app/feature/profile/view/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AppSection extends StatefulWidget {
@@ -17,15 +19,15 @@ class _AppSectionState extends State<AppSection> {
   List<Widget> widgetList = [
     HomeScreen(),
     const CartScreen(),
-    const FavoriteScreen(),
+    FavoriteScreen(),
     const ProfileScreen(),
   ];
 
-  int index = 0;
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocBuilder<MainTabCubit, int>(
+      builder: (context, index) {
+        return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         unselectedFontSize: 13,
         selectedFontSize: 14,
@@ -45,9 +47,7 @@ class _AppSectionState extends State<AppSection> {
         ),
         currentIndex: index,
         onTap: (selectedIndex) {
-          setState(() {
-            index = selectedIndex;
-          });
+          context.read<MainTabCubit>().selectTab(selectedIndex);
         },
         items: [
           BottomNavigationBarItem(
@@ -101,6 +101,8 @@ class _AppSectionState extends State<AppSection> {
         ],
       ),
       body: SafeArea(child: widgetList[index]),
+    );
+      },
     );
   }
 }

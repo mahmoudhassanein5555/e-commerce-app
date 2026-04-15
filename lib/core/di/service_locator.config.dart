@@ -12,6 +12,7 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../feature/app_section/main_tab_cubit.dart' as _i334;
 import '../../feature/auth/login/data/api/login_api.dart' as _i889;
 import '../../feature/auth/login/data/repositories/data_source/login_data_source_imp.dart'
     as _i165;
@@ -50,6 +51,16 @@ import '../../feature/details/domain/use_case/get_product_details_use_case.dart'
     as _i461;
 import '../../feature/details/presentation/view_model/home_cubit/product_details_cubit.dart'
     as _i249;
+import '../../feature/favorite/data/repositories/data_sources_imp/product_favorite_data_source_imp.dart'
+    as _i363;
+import '../../feature/favorite/data/repositories/reposatories_imp/product_favorite_repo_imp.dart'
+    as _i38;
+import '../../feature/favorite/domain/repositories/data_source/product_favorite_data_source.dart'
+    as _i729;
+import '../../feature/favorite/domain/repositories/repo/product_favorite_repo.dart'
+    as _i1015;
+import '../../feature/favorite/presentation/view_model/home_cubit/product_favorite_cubit.dart'
+    as _i353;
 import '../../feature/home/data/api/home_api.dart' as _i446;
 import '../../feature/home/data/repositories/data_sources_imp/home_data_source_imp.dart'
     as _i650;
@@ -79,10 +90,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i361.RegisterApi>(() => _i361.RegisterApi());
     gh.factory<_i160.ProductDetailsApi>(() => _i160.ProductDetailsApi());
     gh.factory<_i446.HomeApi>(() => _i446.HomeApi());
+    gh.lazySingleton<_i334.MainTabCubit>(() => _i334.MainTabCubit());
+    gh.factory<_i729.ProductFavoriteDataSource>(
+        () => _i363.ProductFavoriteDataSourceImp());
     gh.factory<_i887.ProductDetailsDataSource>(
         () => _i769.ProductDetailsDataSourceImp(gh<_i160.ProductDetailsApi>()));
+    gh.factory<_i1015.ProductFavoriteRepo>(() =>
+        _i38.ProductFavoriteRepoImp(gh<_i729.ProductFavoriteDataSource>()));
     gh.factory<_i1059.HomeDataSource>(
         () => _i650.HomeDataSourceImp(gh<_i446.HomeApi>()));
+    gh.factory<_i353.FavoriteCubit>(
+        () => _i353.FavoriteCubit(gh<_i1015.ProductFavoriteRepo>()));
     gh.factory<_i152.LoginDataSource>(
         () => _i165.LoginDataSourceImp(gh<_i889.LoginApi>()));
     gh.factory<_i458.RegisterDataSource>(

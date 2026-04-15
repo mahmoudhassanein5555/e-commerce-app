@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  ProductDetailsScreen({super.key, required this.productId});
-  int productId = 1;
+  const ProductDetailsScreen({super.key, required this.productId});
+  final int productId;
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
@@ -33,7 +33,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           child: SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  debugPrint('Add to cart placeholder from product details');
+                },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xff212121)),
                 child: const Padding(
