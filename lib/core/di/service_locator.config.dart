@@ -38,6 +38,16 @@ import '../../feature/auth/register/domain/use_case/register_use_case.dart'
     as _i200;
 import '../../feature/auth/register/presentation/view_model/home_cubit/register_cubit.dart'
     as _i377;
+import '../../feature/cart/data/repositories/data_sources_imp/product_cart_data_source_imp.dart'
+    as _i319;
+import '../../feature/cart/data/repositories/reposatories_imp/product_cart_repo_imp.dart'
+    as _i138;
+import '../../feature/cart/domain/repositories/data_source/product_cart_data_source.dart'
+    as _i329;
+import '../../feature/cart/domain/repositories/repo/product_cart_repo.dart'
+    as _i380;
+import '../../feature/cart/presentation/view_model/home_cubit/product_cart_cubit.dart'
+    as _i4;
 import '../../feature/details/data/api/details_api.dart' as _i160;
 import '../../feature/details/data/repositories/data_sources_imp/product_details_data_source_imp.dart'
     as _i769;
@@ -95,6 +105,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i363.ProductFavoriteDataSourceImp());
     gh.factory<_i887.ProductDetailsDataSource>(
         () => _i769.ProductDetailsDataSourceImp(gh<_i160.ProductDetailsApi>()));
+    gh.factory<_i329.ProductCartDataSource>(
+        () => _i319.ProductCartDataSourceImp());
     gh.factory<_i1015.ProductFavoriteRepo>(() =>
         _i38.ProductFavoriteRepoImp(gh<_i729.ProductFavoriteDataSource>()));
     gh.factory<_i1059.HomeDataSource>(
@@ -105,6 +117,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i165.LoginDataSourceImp(gh<_i889.LoginApi>()));
     gh.factory<_i458.RegisterDataSource>(
         () => _i334.RegisterDataSourceImp(gh<_i361.RegisterApi>()));
+    gh.factory<_i380.ProductCartRepo>(
+        () => _i138.ProductCartRepoImp(gh<_i329.ProductCartDataSource>()));
     gh.factory<_i724.LoginRepo>(
         () => _i916.LoginRepoImp(gh<_i152.LoginDataSource>()));
     gh.factory<_i308.ProductDetailsRepo>(() =>
@@ -125,6 +139,7 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i293.LoginCubit(gh<_i494.LoginUseCase>()));
     gh.factory<_i200.RegisterUseCase>(
         () => _i200.RegisterUseCase(gh<_i582.RegisterRepo>()));
+    gh.factory<_i4.CartCubit>(() => _i4.CartCubit(gh<_i380.ProductCartRepo>()));
     gh.factory<_i377.RegisterCubit>(
         () => _i377.RegisterCubit(gh<_i200.RegisterUseCase>()));
     gh.factory<_i249.ProductDetailsCubit>(

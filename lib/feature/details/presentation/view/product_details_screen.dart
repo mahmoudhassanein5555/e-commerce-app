@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:e_commerce_app/core/di/service_locator.dart';
 import 'package:e_commerce_app/feature/details/presentation/view_model/home_cubit/product_details_cubit.dart';
 import 'package:e_commerce_app/feature/details/presentation/view_model/home_cubit/product_details_state.dart';
+import 'package:e_commerce_app/feature/cart/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -34,7 +35,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             width: double.infinity,
             child: ElevatedButton(
                 onPressed: () {
-                  debugPrint('Add to cart placeholder from product details');
+                  final state = _productDetailsCubit.state;
+                  if (state is GetProductsDetailsSuccess) {
+                    context.read<CartCubit>().addProductLine(
+                      productId: state.productDetails.id,
+                      title: state.productDetails.title,
+                      imageUrl: state.productDetails.images.isNotEmpty
+                          ? state.productDetails.images[0]
+                          : CartCubit.fallbackImageUrl,
+                      price: state.productDetails.price.toString(),
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xff212121)),
@@ -60,45 +71,52 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             bloc: _productDetailsCubit,
             builder: (context, state) {
               if (state is GetProductsDetailsSuccess) {
+                final images = state.productDetails.images;
                 return SingleChildScrollView(
-                  child: Column(spacing: 10, children: [
-                    SizedBox(
-                        height: 331,
-                        width: double.infinity,
-                        child: Card(
-                          elevation: 10,
-                          child: PageView.builder(
-                            itemCount: state.productDetails.images.length,
-                            onPageChanged: (value) {
-                              setState(() {
-                                currentIndex = value;
-                              });
-                            },
-                            itemBuilder: (context, index) => Image.network(
-                                state.productDetails.images[index]),
-                          ),
-                        )),
-                    DotsIndicator(
-                      dotsCount: state.productDetails.images.length,
-                      position: currentIndex.toDouble(),
-                      decorator: DotsDecorator(
-                        activeColor: Colors.teal,
-                        size: const Size.square(9.0),
-                        activeSize: const Size(18.0, 9.0),
-                        activeShape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0)),
+                  child: Column(children: [
+                    if (images.isNotEmpty) ...[
+                      SizedBox(
+                          height: 331,
+                          width: double.infinity,
+                          child: Card(
+                            elevation: 10,
+                            child: PageView.builder(
+                              itemCount: images.length,
+                              onPageChanged: (value) {
+                                setState(() {
+                                  currentIndex = value;
+                                });
+                              },
+                              itemBuilder: (context, index) =>
+                                  Image.network(images[index]),
+                            ),
+                          )),
+                      const SizedBox(height: 10),
+                      DotsIndicator(
+                        dotsCount: images.length,
+                        position: currentIndex.toDouble(),
+                        decorator: DotsDecorator(
+                          activeColor: Colors.teal,
+                          size: const Size.square(9.0),
+                          activeSize: const Size(18.0, 9.0),
+                          activeShape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5.0)),
+                        ),
                       ),
-                    ),
+                      const SizedBox(height: 10),
+                    ],
                     Row(
                       children: [
-                        FittedBox(
+                        Expanded(
                           child: Text(
                             state.productDetails.title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                                 fontSize: 25, fontWeight: FontWeight.bold),
                           ),
                         ),
-                        const Spacer(),
+                        const SizedBox(width: 8),
                         Text(
                           "EGP ${state.productDetails.price}",
                           style: const TextStyle(
@@ -106,6 +124,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 10),
                     Text(
                       state.productDetails.description,
                       style: const TextStyle(fontSize: 18),
@@ -132,9 +151,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       const SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () {
-                          context
-                              .read<ProductDetailsCubit>()
-                              .getProductDetails(widget.productId);
+                          _productDetailsCubit
+                              .intent(GetProductDetails(productId: widget.productId));
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.teal),
@@ -149,7 +167,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     enabled: true,
                     enableSwitchAnimation: true,
                     child: SingleChildScrollView(
-                      child: Column(spacing: 10, children: [
+                      child: Column(children: [
                         SizedBox(
                             height: 331,
                             width: double.infinity,
@@ -166,6 +184,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     return Container();
                                   }),
                             )),
+                        const SizedBox(height: 10),
                         DotsIndicator(
                           dotsCount: 3,
                           position: currentIndex.toDouble(),
@@ -177,6 +196,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 borderRadius: BorderRadius.circular(5.0)),
                           ),
                         ),
+                        const SizedBox(height: 10),
                         const Row(
                           children: [
                             Text(
@@ -192,6 +212,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ),
                           ],
                         ),
+                        const SizedBox(height: 10),
                         const Text(
                           "Elevate your casual wardrobe with our Classic Red Pullover Hoodie. Crafted with a soft cotton blend for ultimate comfort, this vibrant red hoodie features a kangaroo pocket, adjustable drawstring hood, and ribbed cuffs for a snug fit. The timeless design ensures easy pairing with jeans or joggers for a relaxed yet stylish look, making it a versatile addition to your everyday attire",
                           style: TextStyle(fontSize: 18),
@@ -207,3 +228,4 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ));
   }
 }
+

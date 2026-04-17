@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/feature/favorite/domain/entites/product_favorite_entity.dart';
 import 'package:e_commerce_app/feature/favorite/presentation/view_model/home_cubit/product_favorite_cubit.dart';
+import 'package:e_commerce_app/feature/cart/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -90,7 +91,12 @@ class FavoriteItemWidget extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      debugPrint('Add to cart placeholder from favorites item');
+                      context.read<CartCubit>().addProductLine(
+                        productId: product.productId ?? 0,
+                        title: product.title,
+                        imageUrl: product.image,
+                        price: product.price,
+                      );
                     },
                     child: const Text('Add to cart'),
                   ),
