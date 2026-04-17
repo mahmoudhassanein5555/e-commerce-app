@@ -2,13 +2,13 @@ import 'package:e_commerce_app/feature/home/domain/entites/category_response_ent
 import 'package:flutter/material.dart';
 
 class TabItemWidget extends StatelessWidget {
-  TabItemWidget({
+  const TabItemWidget({
     super.key,
     required this.category,
     required this.selected,
   });
   final CategoriesResponseEntity category;
-  bool selected;
+  final bool selected;
   @override
   Widget build(BuildContext context) {
     return Container(
