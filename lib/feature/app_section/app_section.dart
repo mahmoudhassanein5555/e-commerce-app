@@ -1,7 +1,7 @@
 import 'package:e_commerce_app/feature/app_section/main_tab_cubit.dart';
-import 'package:e_commerce_app/feature/cart/view/cart_screen.dart';
 import 'package:e_commerce_app/feature/favorite/presentation/view/product_favorite_screen.dart';
 import 'package:e_commerce_app/feature/home/presentation/view/home_screen.dart';
+import 'package:e_commerce_app/feature/cart/view/cart_screen.dart';
 import 'package:e_commerce_app/feature/profile/view/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
