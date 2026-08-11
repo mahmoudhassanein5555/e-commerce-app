@@ -127,41 +127,38 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
+                const SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.center,
+                  child: Text.rich(
+                    TextSpan(
+                      text: "Don't have an account? ",
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Color(0xff6E6A7C),
+                      ),
+                      children: [
+                        TextSpan(
+                          text: "Sign Up",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Color(0xff212121),
+                            fontWeight: FontWeight.w600,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.of(context).pushNamed(RegisterScreen.routeName);
+                            },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButtonAnimator: FloatingActionButtonAnimator.noAnimation,
-      floatingActionButton: MediaQuery.of(context).viewInsets.bottom == 0
-          ? Align(
-              alignment: Alignment.bottomCenter,
-              child: Text.rich(
-                TextSpan(
-                  text: "Don't have an account? ",
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Color(0xff6E6A7C),
-                  ),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      Navigator.of(context).pushNamed(RegisterScreen.routeName);
-                    },
-                  children: const [
-                    TextSpan(
-                      text: "Sign Up",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0xff212121),
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            )
-          : null,
     );
   }
 }

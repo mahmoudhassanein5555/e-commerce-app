@@ -7,4 +7,6 @@ class CartState {
 
   int get totalQuantity =>
       items.fold(0, (sum, element) => sum + element.quantity);
+  double get totalPrice => items.fold(
+      0, (sum, element) => sum + (double.tryParse(element.price) ?? 0) * element.quantity);
 }

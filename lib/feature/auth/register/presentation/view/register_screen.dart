@@ -167,41 +167,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
+                const SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.center,
+                  child: Text.rich(
+                    TextSpan(
+                      text: "Already have an account? ",
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Color(0xff6E6A7C),
+                      ),
+                      children: [
+                        TextSpan(
+                          text: "Login",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Color(0xff212121),
+                            fontWeight: FontWeight.w600,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.of(context).pushNamed(LoginScreen.routeName);
+                            },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButtonAnimator: FloatingActionButtonAnimator.noAnimation,
-      floatingActionButton: MediaQuery.of(context).viewInsets.bottom == 0
-          ? Align(
-              alignment: Alignment.bottomCenter,
-              child: Text.rich(
-                TextSpan(
-                  text: "Already have an account? ",
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Color(0xff6E6A7C),
-                  ),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      Navigator.of(context).pushNamed(LoginScreen.routeName);
-                    },
-                  children: const [
-                    TextSpan(
-                      text: "Login",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0xff212121),
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            )
-          : null,
     );
   }
 }

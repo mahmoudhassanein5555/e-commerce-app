@@ -6,4 +6,5 @@ abstract class AppApis {
   static const String products = "/api/v1/products/";
   // static const String productDetails = "/api/v1/products/";
   static const String productsForEachCategory = "/products/";
+  static const String profile = "/api/v1/auth/profile";
 }

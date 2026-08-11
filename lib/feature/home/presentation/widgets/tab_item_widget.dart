@@ -8,7 +8,7 @@ class TabItemWidget extends StatelessWidget {
     required this.selected,
   });
   final CategoriesResponseEntity category;
-  bool selected;
+  final bool selected;
   @override
   Widget build(BuildContext context) {
     return Container(

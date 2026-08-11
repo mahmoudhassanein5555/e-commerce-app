@@ -64,4 +64,38 @@ abstract class Validator {
       return null;
     }
   }
+
+  static String? validateCardNumber(String? val) {
+    if (val == null || val.trim().isEmpty) {
+      return 'Card number cannot be empty';
+    }
+    final cleanVal = val.replaceAll(' ', '');
+    if (cleanVal.length < 16) {
+      return 'Card number must be at least 16 digits';
+    }
+    if (!RegExp(r'^\d+$').hasMatch(cleanVal)) {
+      return 'Card number must contain numbers only';
+    }
+    return null;
+  }
+
+  static String? validateCVV(String? val) {
+    if (val == null || val.trim().isEmpty) {
+      return 'CVV cannot be empty';
+    }
+    if (val.trim().length != 3) {
+      return 'CVV must be exactly 3 digits';
+    }
+    if (!RegExp(r'^\d+$').hasMatch(val.trim())) {
+      return 'CVV must contain numbers only';
+    }
+    return null;
+  }
+
+  static String? validateExpiryDate(String? val) {
+    if (val == null || val.trim().isEmpty) {
+      return 'Expiry date cannot be empty';
+    }
+    return null;
+  }
 }

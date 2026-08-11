@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/feature/auth/login/presentation/view_model/home_cubit/login_cubit.dart';
+import 'package:e_commerce_app/feature/auth/auth_cubit.dart';
 import 'package:e_commerce_app/feature/auth/register/presentation/view_model/home_cubit/register_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce_app/core/di/service_locator.dart';
@@ -14,6 +15,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:e_commerce_app/feature/cart/data/models/product_cart_model.dart';
 import 'package:e_commerce_app/feature/cart/presentation/view_model/home_cubit/product_cart_cubit.dart';
 import 'package:e_commerce_app/feature/checkout/presentation/view/checkout_screen.dart';
+import 'package:e_commerce_app/feature/checkout/presentation/view/payment_success_screen.dart';
+import 'package:e_commerce_app/feature/checkout/presentation/view/visa_card_screen.dart';
+import 'package:e_commerce_app/feature/checkout/presentation/view/fake_wallet_screen.dart';
+import 'package:e_commerce_app/feature/checkout/presentation/view_model/checkout_cubit.dart';
 
 // Hive favorites: the on-disk box file is only created after Hive.initFlutter() runs and the
 // ProductFavoriteModel TypeAdapter is registered (see generated product_favorite_model.g.dart).
@@ -39,6 +44,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => getIt<MainTabCubit>()),
         BlocProvider(create: (context) => getIt<RegisterCubit>()),
+        BlocProvider(create: (context) => getIt<AuthCubit>()),
         BlocProvider(
           create: (context) {
             final cubit = getIt<FavoriteCubit>();
@@ -47,6 +53,7 @@ class MyApp extends StatelessWidget {
           },
         ),
         BlocProvider(create: (context) => getIt<CartCubit>()),
+        BlocProvider(create: (context) => CheckoutCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -64,6 +71,9 @@ class MyApp extends StatelessWidget {
               child: const RegisterScreen()),
           AppSection.routeName: (context) => const AppSection(),
           CheckoutScreen.routeName: (context) => const CheckoutScreen(),
+          PaymentSuccessScreen.routeName: (context) => const PaymentSuccessScreen(),
+          VisaCardScreen.routeName: (context) => const VisaCardScreen(),
+          FakeWalletScreen.routeName: (context) => const FakeWalletScreen(),
         },
       ),
     );
