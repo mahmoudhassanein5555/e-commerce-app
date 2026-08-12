@@ -8,8 +8,8 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class RegisterCubit extends Cubit<RegisterState> {
+  final RegisterUseCase _registerUseCase;
   RegisterCubit(this._registerUseCase) : super(RegisterInitial());
-  RegisterUseCase _registerUseCase;
   Future<void> intent(ResiterIntent event) async {
     switch (event) {
       case RegisterUser():

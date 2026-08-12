@@ -9,7 +9,7 @@ class LoginHeaderWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // Luxury Monogram Badge
+        // Luxury Monogram Badge "SB"
         Container(
           width: 68,
           height: 68,
@@ -36,21 +36,22 @@ class LoginHeaderWidget extends StatelessWidget {
           ),
           child: const Center(
             child: Text(
-              "L",
+              "SB",
               style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w700,
+                fontSize: 26,
+                fontWeight: FontWeight.w800,
                 fontFamily: 'serif',
                 color: Color(0xFFB88E3E),
+                letterSpacing: -0.5,
               ),
             ),
           ),
         ),
         const SizedBox(height: 20),
 
-        // Brand Sub-heading "M A I S O N"
+        // Brand Sub-heading "S W I F T B U Y"
         const Text(
-          "M A I S O N",
+          "S W I F T B U Y",
           style: TextStyle(
             fontSize: 11.5,
             fontWeight: FontWeight.w600,
@@ -60,12 +61,12 @@ class LoginHeaderWidget extends StatelessWidget {
         ),
         const SizedBox(height: 6),
 
-        // Brand Title "Lumière."
+        // Brand Title "SwiftBuy."
         RichText(
           text: const TextSpan(
             children: [
               TextSpan(
-                text: "Lumière",
+                text: "SwiftBuy",
                 style: TextStyle(
                   fontSize: 34,
                   fontWeight: FontWeight.w700,

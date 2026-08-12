@@ -1,79 +1,102 @@
-import 'package:e_commerce_app/feature/auth/register/presentation/view/register_screen.dart';
 import 'package:flutter/material.dart';
 
+enum AuthTab { signIn, signUp }
+
 class AuthTabSwitcher extends StatelessWidget {
-  final VoidCallback? onSignUpTap;
+  final AuthTab selectedTab;
+  final ValueChanged<AuthTab> onTabChanged;
 
   const AuthTabSwitcher({
     super.key,
-    this.onSignUpTap,
+    required this.selectedTab,
+    required this.onTabChanged,
   });
 
   @override
   Widget build(BuildContext context) {
+    final isSignIn = selectedTab == AuthTab.signIn;
+
     return Container(
-      height: 48,
+      height: 50,
       padding: const EdgeInsets.all(4.0),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.85),
+        color: Colors.white.withValues(alpha: 0.88),
         borderRadius: BorderRadius.circular(30),
         border: Border.all(
-          color: Colors.white.withValues(alpha: 0.9),
+          color: Colors.white,
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 12,
+            color: const Color(0xFF1E2E25).withValues(alpha: 0.05),
+            blurRadius: 14,
             offset: const Offset(0, 3),
           ),
         ],
       ),
       child: Row(
         children: [
-          // Active Sign In Tab
+          // Sign In Tab
           Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: const Color(0xFF0C1613),
-                borderRadius: BorderRadius.circular(24),
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color(0xFF0C1613).withValues(alpha: 0.25),
-                    blurRadius: 8,
-                    offset: const Offset(0, 3),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(24),
+              onTap: () => onTabChanged(AuthTab.signIn),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                decoration: BoxDecoration(
+                  color: isSignIn ? const Color(0xFF0C1613) : Colors.transparent,
+                  borderRadius: BorderRadius.circular(24),
+                  boxShadow: isSignIn
+                      ? [
+                          BoxShadow(
+                            color: const Color(0xFF0C1613).withValues(alpha: 0.25),
+                            blurRadius: 8,
+                            offset: const Offset(0, 3),
+                          ),
+                        ]
+                      : null,
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  "Sign In",
+                  style: TextStyle(
+                    color: isSignIn ? Colors.white : const Color(0xFF5A6961),
+                    fontSize: 14,
+                    fontWeight: isSignIn ? FontWeight.w600 : FontWeight.w500,
+                    letterSpacing: 0.2,
                   ),
-                ],
-              ),
-              alignment: Alignment.center,
-              child: const Text(
-                "Sign In",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 0.2,
                 ),
               ),
             ),
           ),
 
-          // Inactive Sign Up Tab
+          // Sign Up Tab
           Expanded(
             child: InkWell(
               borderRadius: BorderRadius.circular(24),
-              onTap: onSignUpTap ??
-                  () {
-                    Navigator.of(context).pushNamed(RegisterScreen.routeName);
-                  },
-              child: Container(
+              onTap: () => onTabChanged(AuthTab.signUp),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                decoration: BoxDecoration(
+                  color: !isSignIn ? const Color(0xFF0C1613) : Colors.transparent,
+                  borderRadius: BorderRadius.circular(24),
+                  boxShadow: !isSignIn
+                      ? [
+                          BoxShadow(
+                            color: const Color(0xFF0C1613).withValues(alpha: 0.25),
+                            blurRadius: 8,
+                            offset: const Offset(0, 3),
+                          ),
+                        ]
+                      : null,
+                ),
                 alignment: Alignment.center,
-                child: const Text(
+                child: Text(
                   "Sign Up",
                   style: TextStyle(
-                    color: Color(0xFF5A6961),
+                    color: !isSignIn ? Colors.white : const Color(0xFF5A6961),
                     fontSize: 14,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: !isSignIn ? FontWeight.w600 : FontWeight.w500,
                     letterSpacing: 0.2,
                   ),
                 ),
