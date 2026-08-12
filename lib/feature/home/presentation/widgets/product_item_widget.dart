@@ -1,4 +1,3 @@
-import 'package:e_commerce_app/feature/details/presentation/view/product_details_screen.dart';
 import 'package:e_commerce_app/feature/home/domain/entites/product_response_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';

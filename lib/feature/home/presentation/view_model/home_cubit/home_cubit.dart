@@ -27,7 +27,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> loadMainData(int categoryId) async {
     emit(HomeLoading());
-    Future.wait([getCategories(), getProducts(categoryId)]);
+    await Future.wait([getCategories(), getProducts(categoryId)]);
   }
 
   Future<void> getCategories() async {
@@ -56,11 +56,11 @@ sealed class HomeIntent {}
 class GetCategories extends HomeIntent {}
 
 class GetProducts extends HomeIntent {
-  int categoryId;
+  final int categoryId;
   GetProducts({required this.categoryId});
 }
 
 class LoadMainData extends HomeIntent {
-  int categoryId;
+  final int categoryId;
   LoadMainData({required this.categoryId});
 }

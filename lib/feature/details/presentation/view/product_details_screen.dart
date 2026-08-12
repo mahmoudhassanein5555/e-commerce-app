@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  ProductDetailsScreen({super.key, required this.productId});
-  int productId = 1;
+  const ProductDetailsScreen({super.key, required this.productId});
+  final int productId;
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
@@ -130,9 +130,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       const SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () {
-                          context
-                              .read<ProductDetailsCubit>()
-                              .getProductDetails(widget.productId);
+                          _productDetailsCubit.intent(
+                              GetProductDetails(productId: widget.productId));
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.teal),

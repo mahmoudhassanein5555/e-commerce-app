@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 @injectable
 class GetCategoriesUseCase {
   GetCategoriesUseCase(this._homeRepo);
-  HomeRepo _homeRepo;
+  final HomeRepo _homeRepo;
   Future<ResultApi<List<CategoriesResponseEntity>>> invoke() {
     return _homeRepo.getCategories();
   }

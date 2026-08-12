@@ -56,9 +56,12 @@ class _AppSectionState extends State<AppSection> {
               height: 23,
               width: 23,
               fit: BoxFit.cover,
-              color: index == 0
-                  ? const Color(0xff212121)
-                  : const Color(0xff5C5C5C),
+              colorFilter: ColorFilter.mode(
+                index == 0
+                    ? const Color(0xff212121)
+                    : const Color(0xff5C5C5C),
+                BlendMode.srcIn,
+              ),
             ),
             label: 'Home',
           ),
@@ -68,9 +71,12 @@ class _AppSectionState extends State<AppSection> {
               height: 23,
               width: 23,
               fit: BoxFit.cover,
-              color: index == 1
-                  ? const Color(0xff212121)
-                  : const Color(0xff5C5C5C),
+              colorFilter: ColorFilter.mode(
+                index == 1
+                    ? const Color(0xff212121)
+                    : const Color(0xff5C5C5C),
+                BlendMode.srcIn,
+              ),
             ),
             label: 'Cart',
           ),
@@ -80,9 +86,12 @@ class _AppSectionState extends State<AppSection> {
               height: 23,
               width: 23,
               fit: BoxFit.cover,
-              color: index == 2
-                  ? const Color(0xff212121)
-                  : const Color(0xff5C5C5C),
+              colorFilter: ColorFilter.mode(
+                index == 2
+                    ? const Color(0xff212121)
+                    : const Color(0xff5C5C5C),
+                BlendMode.srcIn,
+              ),
             ),
             label: ' Favorite',
           ),
@@ -92,9 +101,12 @@ class _AppSectionState extends State<AppSection> {
               height: 23,
               width: 23,
               fit: BoxFit.cover,
-              color: index == 3
-                  ? const Color(0xff212121)
-                  : const Color(0xff5C5C5C),
+              colorFilter: ColorFilter.mode(
+                index == 3
+                    ? const Color(0xff212121)
+                    : const Color(0xff5C5C5C),
+                BlendMode.srcIn,
+              ),
             ),
             label: 'Profile',
           ),

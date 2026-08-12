@@ -26,7 +26,7 @@ class ProductDetailsDto {
     price = json['price'];
     description = json['description'];
     category = json['category'] != null
-        ? new CategoryDto.fromJson(json['category'])
+        ? CategoryDto.fromJson(json['category'])
         : null;
     images = json['images'].cast<String>();
   }

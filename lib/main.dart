@@ -9,6 +9,7 @@ import 'package:e_commerce_app/feature/onboarding/onboarding_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   runApp(const MyApp());
 }
@@ -32,10 +33,7 @@ class MyApp extends StatelessWidget {
         RegisterScreen.routeName: (context) => BlocProvider<RegisterCubit>(
             create: (context) => getIt<RegisterCubit>(),
             child: const RegisterScreen()),
-        AppSection.routeName: (context) => BlocProvider(
-              create: (context) => getIt<RegisterCubit>(),
-              child: const AppSection(),
-            ),
+        AppSection.routeName: (context) => const AppSection(),
       },
     );
   }

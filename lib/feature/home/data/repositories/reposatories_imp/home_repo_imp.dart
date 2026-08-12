@@ -8,7 +8,7 @@ import 'package:injectable/injectable.dart';
 @Injectable(as: HomeRepo)
 class HomeRepoImp implements HomeRepo {
   HomeRepoImp(this._homeDataSource);
-  HomeDataSource _homeDataSource;
+  final HomeDataSource _homeDataSource;
   @override
   Future<ResultApi<List<CategoriesResponseEntity>>> getCategories() async =>
       await _homeDataSource.getCategories();

@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 @injectable
 class GetProdactsUseCase {
   GetProdactsUseCase(this._homeRepo);
-  HomeRepo _homeRepo;
+  final HomeRepo _homeRepo;
   Future<ResultApi<List<ProductsResponseEntity>>> invoke(int categoryId) async =>
       await _homeRepo.getProducts(categoryId);
 }
