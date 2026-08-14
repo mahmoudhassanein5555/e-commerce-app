@@ -17,6 +17,8 @@ dependencies:
 
   # Networking & Data
   http: ^1.6.0
+  dio: ^5.7.0
+  pretty_dio_logger: ^1.4.0
   shared_preferences: ^2.2.2
   equatable: ^2.0.5
 
