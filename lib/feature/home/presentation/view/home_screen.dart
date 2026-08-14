@@ -1,4 +1,7 @@
 import 'package:e_commerce_app/core/di/service_locator.dart';
+import 'package:e_commerce_app/core/utils/app_colors.dart';
+import 'package:e_commerce_app/core/utils/app_strings.dart';
+import 'package:e_commerce_app/core/utils/app_text_style.dart';
 import 'package:e_commerce_app/feature/details/presentation/view/product_details_screen.dart';
 import 'package:e_commerce_app/feature/home/presentation/view_model/home_cubit/home_cubit.dart';
 import 'package:e_commerce_app/feature/home/presentation/view_model/home_cubit/home_state.dart';
@@ -11,13 +14,14 @@ import 'package:e_commerce_app/feature/home/presentation/widgets/section_header_
 import 'package:e_commerce_app/feature/home/presentation/widgets/tab_container_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, this.onTapSelected});
 
   final ValueChanged<int>? onTapSelected;
-  static const String routeName = 'HomeScreen';
+  static const String routeName = AppStrings.homeScreenRoute;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -45,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       body: Stack(
         children: [
           CustomScrollView(
@@ -61,8 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               // Spacing on the white body section for the overlapping bottom half of the banner
-              const SliverToBoxAdapter(
-                child: SizedBox(height: 84),
+              SliverToBoxAdapter(
+                child: SizedBox(height: 84.h),
               ),
 
               // 2. Categories Filter Chips Bar (sitting on white body section)
@@ -95,21 +99,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              const SliverToBoxAdapter(
-                child: SizedBox(height: 22),
+              SliverToBoxAdapter(
+                child: SizedBox(height: 22.h),
               ),
 
               // "For you" Section Title
               const SliverToBoxAdapter(
-                child: SectionHeaderWidget(
-                  title: 'For you',
-                  subtitle: 'Hand-selected · Updated daily',
-                  actionText: 'See all',
-                ),
+                child: SectionHeaderWidget(),
               ),
 
-              const SliverToBoxAdapter(
-                child: SizedBox(height: 14),
+              SliverToBoxAdapter(
+                child: SizedBox(height: 14.h),
               ),
 
               // Products Grid Section
@@ -122,30 +122,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context, state) {
                   if (state is GetProductsSuccess) {
                     if (state.products.isEmpty) {
-                      return const SliverToBoxAdapter(
+                      return SliverToBoxAdapter(
                         child: Center(
                           child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 40),
+                            padding: EdgeInsets.symmetric(vertical: 40.h),
                             child: Text(
-                              'No products found in this category.',
-                              style: TextStyle(
-                                color: Color(0xFF6B7B73),
-                                fontSize: 14,
-                              ),
+                              AppStrings.noProductsFound,
+                              style: AppTextStyle.emptyState,
                             ),
                           ),
                         ),
                       );
                     }
                     return SliverPadding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
                       sliver: SliverGrid(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           childAspectRatio: 0.58,
-                          crossAxisSpacing: 14,
-                          mainAxisSpacing: 14,
+                          crossAxisSpacing: 14.w,
+                          mainAxisSpacing: 14.h,
                         ),
                         delegate: SliverChildBuilderDelegate(
                           (context, index) {
@@ -188,27 +184,27 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               // Bottom Scroll Padding
-              const SliverToBoxAdapter(
-                child: SizedBox(height: 80),
+              SliverToBoxAdapter(
+                child: SizedBox(height: 80.h),
               ),
             ],
           ),
 
           // Floating Chat Assistant Button
           Positioned(
-            bottom: 24,
-            right: 16,
+            bottom: 24.h,
+            right: 16.w,
             child: HomeFloatingChatButton(
               onTap: () {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: const Text('Maison Concierge at your service.'),
+                    content: const Text(AppStrings.maisonConciergeMessage),
                     duration: const Duration(seconds: 2),
                     behavior: SnackBarBehavior.floating,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.r),
                     ),
-                    backgroundColor: const Color(0xFF0D1C17),
+                    backgroundColor: AppColors.darkBackground,
                   ),
                 );
               },

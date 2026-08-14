@@ -1,5 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_commerce_app/core/utils/app_colors.dart';
+import 'package:e_commerce_app/core/utils/app_strings.dart';
+import 'package:e_commerce_app/core/utils/app_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EditorsPickBannerWidget extends StatelessWidget {
   const EditorsPickBannerWidget({
@@ -7,9 +11,9 @@ class EditorsPickBannerWidget extends StatelessWidget {
     this.onExploreTap,
     this.imageUrl =
         'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=400&q=80',
-    this.tag = "EDITOR'S PICK",
-    this.title = 'The Quiet Collection',
-    this.description = 'Curated objects for stillness and shine.',
+    this.tag = AppStrings.editorsPickTag,
+    this.title = AppStrings.editorsPickTitle,
+    this.description = AppStrings.editorsPickDescription,
   });
 
   final VoidCallback? onExploreTap;
@@ -21,19 +25,19 @@ class EditorsPickBannerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(14),
+      padding: EdgeInsets.all(14.w),
       decoration: BoxDecoration(
-        color: const Color(0xFFFBF8F2),
-        borderRadius: BorderRadius.circular(32),
+        color: AppColors.bannerBackground,
+        borderRadius: BorderRadius.circular(32.r),
         border: Border.all(
-          color: const Color(0xFFF1EAE0),
-          width: 1.2,
+          color: AppColors.bannerBorder,
+          width: 1.2.w,
         ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 18,
-            offset: const Offset(0, 8),
+            blurRadius: 18.r,
+            offset: Offset(0, 8.h),
           ),
         ],
       ),
@@ -42,46 +46,46 @@ class EditorsPickBannerWidget extends StatelessWidget {
         children: [
           // Left Product Arched/Rounded Thumbnail Frame
           Container(
-            width: 105,
-            height: 110,
+            width: 105.w,
+            height: 110.h,
             decoration: BoxDecoration(
-              color: const Color(0xFFE2EFE6),
-              borderRadius: BorderRadius.circular(26),
+              color: AppColors.bannerThumbnailBackground,
+              borderRadius: BorderRadius.circular(26.r),
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(26),
+              borderRadius: BorderRadius.circular(26.r),
               child: CachedNetworkImage(
                 imageUrl: imageUrl,
                 fit: BoxFit.cover,
                 placeholder: (context, url) => Container(
-                  color: const Color(0xFFE2EFE6),
-                  child: const Center(
+                  color: AppColors.bannerThumbnailBackground,
+                  child: Center(
                     child: SizedBox(
-                      width: 22,
-                      height: 22,
-                      child: CircularProgressIndicator(
+                      width: 22.w,
+                      height: 22.w,
+                      child: const CircularProgressIndicator(
                         strokeWidth: 2,
                         valueColor: AlwaysStoppedAnimation<Color>(
-                          Color(0xFFB88939),
+                          AppColors.goldTag,
                         ),
                       ),
                     ),
                   ),
                 ),
                 errorWidget: (context, url, error) => Container(
-                  color: const Color(0xFFE2EFE6),
-                  child: const Center(
+                  color: AppColors.bannerThumbnailBackground,
+                  child: Center(
                     child: Icon(
                       Icons.auto_awesome_rounded,
-                      color: Color(0xFFB88939),
-                      size: 32,
+                      color: AppColors.goldTag,
+                      size: 32.sp,
                     ),
                   ),
                 ),
               ),
             ),
           ),
-          const SizedBox(width: 14),
+          SizedBox(width: 14.w),
 
           // Right Content Details
           Expanded(
@@ -91,66 +95,45 @@ class EditorsPickBannerWidget extends StatelessWidget {
               children: [
                 Text(
                   tag,
-                  style: const TextStyle(
-                    color: Color(0xFFB88939),
-                    fontSize: 10.5,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: 1.8,
-                  ),
+                  style: AppTextStyle.bannerTag,
                 ),
-                const SizedBox(height: 5),
+                SizedBox(height: 5.h),
                 Text(
                   title,
-                  style: const TextStyle(
-                    color: Color(0xFF101F1A),
-                    fontSize: 16.5,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: -0.3,
-                  ),
+                  style: AppTextStyle.bannerTitle,
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.h),
                 Text(
                   description,
-                  style: const TextStyle(
-                    color: Color(0xFF55655F),
-                    fontSize: 12,
-                    height: 1.35,
-                    fontWeight: FontWeight.w400,
-                  ),
+                  style: AppTextStyle.bannerDescription,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: 10.h),
                 InkWell(
                   onTap: onExploreTap,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20.r),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 7,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 7.h,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF091813),
-                      borderRadius: BorderRadius.circular(20),
+                      color: AppColors.darkButton,
+                      borderRadius: BorderRadius.circular(20.r),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          'Explore',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          AppStrings.explore,
+                          style: AppTextStyle.bannerExplore,
                         ),
-                        SizedBox(width: 4),
+                        SizedBox(width: 4.w),
                         Text(
-                          '+',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 13.5,
-                            fontWeight: FontWeight.w600,
+                          AppStrings.plusSign,
+                          style: AppTextStyle.bannerExplore.copyWith(
+                            fontSize: 13.5.sp,
                           ),
                         ),
                       ],

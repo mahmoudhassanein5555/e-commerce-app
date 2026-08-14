@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/feature/home/domain/entites/category_response_entity.dart';
 import 'package:e_commerce_app/feature/home/presentation/widgets/tab_item_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TabContainerWidget extends StatefulWidget {
   const TabContainerWidget({
@@ -54,10 +55,10 @@ class _TabContainerWidgetState extends State<TabContainerWidget> {
     }
 
     return SizedBox(
-      height: 42,
+      height: 42.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
         itemCount: widget.categories.length,
         itemBuilder: (context, index) {
           final category = widget.categories[index];

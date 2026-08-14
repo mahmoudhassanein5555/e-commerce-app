@@ -1,4 +1,8 @@
+import 'package:e_commerce_app/core/utils/app_colors.dart';
+import 'package:e_commerce_app/core/utils/app_strings.dart';
+import 'package:e_commerce_app/core/utils/app_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeErrorWidget extends StatelessWidget {
   const HomeErrorWidget({
@@ -14,68 +18,58 @@ class HomeErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: 64,
-              height: 64,
+              width: 64.w,
+              height: 64.w,
               decoration: BoxDecoration(
-                color: const Color(0xFFFBF4E8),
+                color: AppColors.errorIconBackground,
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: const Color(0xFFEBD8B8),
-                  width: 1.5,
+                  color: AppColors.errorIconBorder,
+                  width: 1.5.w,
                 ),
               ),
-              child: const Center(
+              child: Center(
                 child: Icon(
                   Icons.refresh_rounded,
-                  color: Color(0xFFB58434),
-                  size: 28,
+                  color: AppColors.goldIcon,
+                  size: 28.sp,
                 ),
               ),
             ),
-            const SizedBox(height: 16),
-            const Text(
-              'Unable to load maison collections',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF111D19),
-              ),
+            SizedBox(height: 16.h),
+            Text(
+              AppStrings.unableToLoadCollections,
+              style: AppTextStyle.errorTitle,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 6),
+            SizedBox(height: 6.h),
             Text(
               message,
-              style: const TextStyle(
-                fontSize: 13,
-                color: Color(0xFF6B7B73),
-              ),
+              style: AppTextStyle.errorSubtitle,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.h),
             ElevatedButton(
               onPressed: onRetry,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF0D1C17),
-                foregroundColor: Colors.white,
+                backgroundColor: AppColors.darkBackground,
+                foregroundColor: AppColors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(16.r),
                 ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 12,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 24.w,
+                  vertical: 12.h,
                 ),
               ),
-              child: const Text(
-                'Try Again',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 13,
-                ),
+              child: Text(
+                AppStrings.tryAgain,
+                style: AppTextStyle.errorButton,
               ),
             ),
           ],

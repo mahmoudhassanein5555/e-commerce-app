@@ -2,6 +2,7 @@ import 'package:e_commerce_app/feature/home/domain/entites/category_response_ent
 import 'package:e_commerce_app/feature/home/domain/entites/product_response_entity.dart';
 import 'package:e_commerce_app/feature/home/presentation/widgets/product_item_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class HomeLoadingSkeletonWidget extends StatelessWidget {
@@ -21,15 +22,15 @@ class HomeLoadingSkeletonWidget extends StatelessWidget {
       enabled: true,
       enableSwitchAnimation: true,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 0.58,
-            crossAxisSpacing: 14,
-            mainAxisSpacing: 14,
+            crossAxisSpacing: 14.w,
+            mainAxisSpacing: 14.h,
           ),
           itemCount: 4,
           itemBuilder: (context, index) {

@@ -1,11 +1,14 @@
+import 'package:e_commerce_app/core/utils/app_strings.dart';
+import 'package:e_commerce_app/core/utils/app_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SectionHeaderWidget extends StatelessWidget {
   const SectionHeaderWidget({
     super.key,
-    this.title = 'For you',
-    this.subtitle = 'Hand-selected · Updated daily',
-    this.actionText = 'See all',
+    this.title = AppStrings.forYouSectionTitle,
+    this.subtitle = AppStrings.forYouSectionSubtitle,
+    this.actionText = AppStrings.seeAll,
     this.onSeeAllTap,
   });
 
@@ -17,7 +20,7 @@ class SectionHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -27,37 +30,24 @@ class SectionHeaderWidget extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(
-                  color: Color(0xFF111827),
-                  fontSize: 22,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: -0.3,
-                ),
+                style: AppTextStyle.sectionTitle,
               ),
-              const SizedBox(height: 2),
+              SizedBox(height: 2.h),
               Text(
                 subtitle,
-                style: const TextStyle(
-                  color: Color(0xFF6B7280),
-                  fontSize: 12.5,
-                  fontWeight: FontWeight.w400,
-                ),
+                style: AppTextStyle.sectionSubtitle,
               ),
             ],
           ),
           if (actionText.isNotEmpty)
             InkWell(
               onTap: onSeeAllTap,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
                 child: Text(
                   actionText,
-                  style: const TextStyle(
-                    color: Color(0xFFB08233),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: AppTextStyle.sectionAction,
                 ),
               ),
             ),

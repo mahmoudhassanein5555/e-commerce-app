@@ -1,11 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:e_commerce_app/feature/cart/cart_cubit.dart';
+import 'package:e_commerce_app/core/utils/app_colors.dart';
+import 'package:e_commerce_app/core/utils/app_strings.dart';
+import 'package:e_commerce_app/core/utils/app_text_style.dart';
+import 'package:e_commerce_app/feature/cart/presentation/view_model/home_cubit/product_cart_cubit.dart';
 import 'package:e_commerce_app/feature/favorite/domain/entites/product_favorite_entity.dart';
 import 'package:e_commerce_app/feature/favorite/presentation/view_model/home_cubit/product_favorite_cubit.dart';
 import 'package:e_commerce_app/feature/favorite/presentation/view_model/home_cubit/product_favorite_state.dart';
 import 'package:e_commerce_app/feature/home/domain/entites/product_response_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marquee/marquee.dart';
 
 class ProductItemWidget extends StatelessWidget {
@@ -26,21 +30,21 @@ class ProductItemWidget extends StatelessWidget {
 
     return InkWell(
       onTap: onProductTap,
-      borderRadius: BorderRadius.circular(24),
+      borderRadius: BorderRadius.circular(24.r),
       child: Container(
-        padding: const EdgeInsets.all(8),
+        padding: EdgeInsets.all(8.w),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(24),
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(24.r),
           border: Border.all(
-            color: const Color(0xFFE4EDE7),
-            width: 1.2,
+            color: AppColors.cardBorder,
+            width: 1.2.w,
           ),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.03),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
+              blurRadius: 10.r,
+              offset: Offset(0, 4.h),
             ),
           ],
         ),
@@ -50,38 +54,37 @@ class ProductItemWidget extends StatelessWidget {
           children: [
             // Studio image container with badges and favorite button
             Container(
-              height: 165,
+              height: 165.h,
               width: double.infinity,
               decoration: BoxDecoration(
-                // color: const Color(0xFFF3ECE0),
-                borderRadius: BorderRadius.circular(18),
+                borderRadius: BorderRadius.circular(18.r),
               ),
               child: Stack(
                 children: [
                   // Product image
                   Positioned.fill(
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(18),
+                      borderRadius: BorderRadius.circular(18.r),
                       child: CachedNetworkImage(
                         imageUrl: product.displayImage,
                         fit: BoxFit.contain,
-                        placeholder: (context, url) => const Center(
+                        placeholder: (context, url) => Center(
                           child: SizedBox(
-                            width: 24,
-                            height: 24,
-                            child: CircularProgressIndicator(
+                            width: 24.w,
+                            height: 24.w,
+                            child: const CircularProgressIndicator(
                               strokeWidth: 2,
                               valueColor: AlwaysStoppedAnimation<Color>(
-                                Color(0xFFC5953F),
+                                AppColors.goldAccent,
                               ),
                             ),
                           ),
                         ),
-                        errorWidget: (context, url, error) => const Center(
+                        errorWidget: (context, url, error) => Center(
                           child: Icon(
                             Icons.broken_image_rounded,
-                            color: Color(0xFF9EABA4),
-                            size: 32,
+                            color: AppColors.iconInactive,
+                            size: 32.sp,
                           ),
                         ),
                       ),
@@ -90,33 +93,28 @@ class ProductItemWidget extends StatelessWidget {
 
                   // Top-left Tag (NEW / LIMITED)
                   Positioned(
-                    top: 8,
-                    left: 8,
+                    top: 8.h,
+                    left: 8.w,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8.w,
+                        vertical: 4.h,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF0D1C17),
-                        borderRadius: BorderRadius.circular(10),
+                        color: AppColors.darkBackground,
+                        borderRadius: BorderRadius.circular(10.r),
                       ),
                       child: Text(
                         badge,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 9.5,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: 0.8,
-                        ),
+                        style: AppTextStyle.productBadge,
                       ),
                     ),
                   ),
 
                   // Top-right Favorite Heart Button
                   Positioned(
-                    top: 8,
-                    right: 8,
+                    top: 8.h,
+                    right: 8.w,
                     child: BlocBuilder<FavoriteCubit, FavoriteState>(
                       builder: (context, state) {
                         final favCubit = context.read<FavoriteCubit>();
@@ -137,18 +135,18 @@ class ProductItemWidget extends StatelessWidget {
                               ),
                             );
                           },
-                          borderRadius: BorderRadius.circular(18),
+                          borderRadius: BorderRadius.circular(18.r),
                           child: Container(
-                            width: 32,
-                            height: 32,
+                            width: 32.w,
+                            height: 32.w,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: AppColors.white,
                               shape: BoxShape.circle,
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withValues(alpha: 0.08),
-                                  blurRadius: 6,
-                                  offset: const Offset(0, 2),
+                                  blurRadius: 6.r,
+                                  offset: Offset(0, 2.h),
                                 ),
                               ],
                             ),
@@ -157,10 +155,10 @@ class ProductItemWidget extends StatelessWidget {
                                 isFavorite
                                     ? Icons.favorite_rounded
                                     : Icons.favorite_border_rounded,
-                                size: 16,
+                                size: 16.sp,
                                 color: isFavorite
-                                    ? const Color(0xFFC5953F)
-                                    : const Color(0xFF9EABA4),
+                                    ? AppColors.goldAccent
+                                    : AppColors.iconInactive,
                               ),
                             ),
                           ),
@@ -172,44 +170,34 @@ class ProductItemWidget extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 10),
+            SizedBox(height: 10.h),
 
             // Brand / Category Tag
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
+              padding: EdgeInsets.symmetric(horizontal: 4.w),
               child: Text(
                 product.brandOrCategory,
-                style: const TextStyle(
-                  color: Color(0xFF6B7B73),
-                  fontSize: 10,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 1.2,
-                ),
+                style: AppTextStyle.productCategory,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
 
-            const SizedBox(height: 3),
+            SizedBox(height: 3.h),
 
             // Product Title with Marquee
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
+              padding: EdgeInsets.symmetric(horizontal: 4.w),
               child: SizedBox(
-                height: 20,
+                height: 20.h,
                 child: product.title.trim().isEmpty
                     ? const SizedBox.shrink()
                     : Marquee(
                         text: product.title,
-                        style: const TextStyle(
-                          color: Color(0xFF111D19),
-                          fontSize: 14.5,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: -0.2,
-                        ),
+                        style: AppTextStyle.productTitle,
                         scrollAxis: Axis.horizontal,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        blankSpace: 20.0,
+                        blankSpace: 20.0.w,
                         velocity: 20.0,
                         pauseAfterRound: const Duration(seconds: 2),
                         showFadingOnlyWhenScrolling: true,
@@ -218,28 +206,25 @@ class ProductItemWidget extends StatelessWidget {
                         startPadding: 0.0,
                         accelerationDuration: const Duration(milliseconds: 300),
                         accelerationCurve: Curves.linear,
-                        decelerationDuration: const Duration(milliseconds: 300),
+                        decelerationDuration:
+                            const Duration(milliseconds: 300),
                         decelerationCurve: Curves.easeOut,
                       ),
               ),
             ),
 
-            const SizedBox(height: 6),
+            SizedBox(height: 6.h),
 
             // Price & Add-To-Cart Row
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
+              padding: EdgeInsets.symmetric(horizontal: 4.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     '\$${product.formattedPrice}',
-                    style: const TextStyle(
-                      color: Color(0xFF111D19),
-                      fontSize: 16.5,
-                      fontWeight: FontWeight.w800,
-                    ),
+                    style: AppTextStyle.productPrice,
                   ),
                   InkWell(
                     onTap: () {
@@ -252,29 +237,30 @@ class ProductItemWidget extends StatelessWidget {
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('${product.title} added to cart'),
+                          content: Text(
+                              '${product.title} ${AppStrings.addedToCartSuffix}'),
                           duration: const Duration(seconds: 2),
                           behavior: SnackBarBehavior.floating,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10.r),
                           ),
-                          backgroundColor: const Color(0xFF0D1C17),
+                          backgroundColor: AppColors.darkBackground,
                         ),
                       );
                     },
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(18.r),
                     child: Container(
-                      width: 34,
-                      height: 34,
+                      width: 34.w,
+                      height: 34.w,
                       decoration: const BoxDecoration(
-                        color: Color(0xFF0D1C17),
+                        color: AppColors.darkBackground,
                         shape: BoxShape.circle,
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Icon(
                           Icons.add_rounded,
-                          color: Colors.white,
-                          size: 20,
+                          color: AppColors.white,
+                          size: 20.sp,
                         ),
                       ),
                     ),
@@ -282,7 +268,7 @@ class ProductItemWidget extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4.h),
           ],
         ),
       ),
