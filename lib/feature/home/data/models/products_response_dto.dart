@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/feature/home/data/models/get_categories_response.dart';
+import 'package:e_commerce_app/feature/home/data/models/categories_response_dto.dart';
 import 'package:e_commerce_app/feature/home/domain/entites/category_response_entity.dart';
 import 'package:e_commerce_app/feature/home/domain/entites/product_response_entity.dart';
 import 'package:hive/hive.dart';
@@ -19,16 +19,17 @@ class ProductsResponseDto {
   String? creationAt;
   String? updatedAt;
 
-  ProductsResponseDto(
-      {this.id,
-      this.title,
-      this.slug,
-      this.price,
-      this.description,
-      this.category,
-      this.images,
-      this.creationAt,
-      this.updatedAt});
+  ProductsResponseDto({
+    this.id,
+    this.title,
+    this.slug,
+    this.price,
+    this.description,
+    this.category,
+    this.images,
+    this.creationAt,
+    this.updatedAt,
+  });
 
   ProductsResponseDto.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -39,17 +40,35 @@ class ProductsResponseDto {
     category = json['category'] != null
         ? CategoriesResponseDto.fromJson(json['category'])
         : null;
-    images = json['images'].cast<String>();
+    if (json['images'] != null) {
+      images = (json['images'] as List).map((e) => e.toString()).toList();
+    } else {
+      images = [];
+    }
     creationAt = json['creationAt'];
     updatedAt = json['updatedAt'];
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'slug': slug,
+      'price': price,
+      'description': description,
+      'category': category?.toJson(),
+      'images': images,
+      'creationAt': creationAt,
+      'updatedAt': updatedAt,
+    };
+  }
+
   ProductsResponseEntity toEntity() => ProductsResponseEntity(
         id: id ?? 0,
-        title: title ?? "",
-        slug: slug ?? "",
+        title: title ?? '',
+        slug: slug ?? '',
         price: price ?? 0,
-        description: description ?? "",
+        description: description ?? '',
         category: category?.toEntity() ?? const CategoriesResponseEntity(),
         images: images ?? [],
       );

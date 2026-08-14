@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/feature/home/domain/entites/category_response_entity.dart';
+import '../../domain/entites/category_response_entity.dart';
 
 class CategoriesResponseDto {
   int? id;
@@ -8,13 +8,14 @@ class CategoriesResponseDto {
   String? creationAt;
   String? updatedAt;
 
-  CategoriesResponseDto(
-      {this.id,
-      this.name,
-      this.slug,
-      this.image,
-      this.creationAt,
-      this.updatedAt});
+  CategoriesResponseDto({
+    this.id,
+    this.name,
+    this.slug,
+    this.image,
+    this.creationAt,
+    this.updatedAt,
+  });
 
   CategoriesResponseDto.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -25,10 +26,21 @@ class CategoriesResponseDto {
     updatedAt = json['updatedAt'];
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'slug': slug,
+      'image': image,
+      'creationAt': creationAt,
+      'updatedAt': updatedAt,
+    };
+  }
+
   CategoriesResponseEntity toEntity() => CategoriesResponseEntity(
         id: id ?? 0,
-        name: name ?? "",
-        slug: slug ?? "",
-        image: image ?? "",
+        name: name ?? '',
+        slug: slug ?? '',
+        image: image ?? '',
       );
 }

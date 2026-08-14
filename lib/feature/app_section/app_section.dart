@@ -19,7 +19,7 @@ class _AppSectionState extends State<AppSection> {
   List<Widget> widgetList = [
     HomeScreen(),
     const CartScreen(),
-    FavoriteScreen(),
+    const FavoriteScreen(),
     const ProfileScreen(),
   ];
 

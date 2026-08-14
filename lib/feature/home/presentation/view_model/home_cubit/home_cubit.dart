@@ -1,7 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:e_commerce_app/core/network/result_api.dart';
-import 'package:e_commerce_app/feature/home/domain/entites/category_response_entity.dart';
-import 'package:e_commerce_app/feature/home/domain/entites/product_response_entity.dart';
 import 'package:e_commerce_app/feature/home/domain/use_case/get_categories_use_case.dart';
 import 'package:e_commerce_app/feature/home/domain/use_case/get_prodacts_use_case.dart';
 import 'package:e_commerce_app/feature/home/presentation/view_model/home_cubit/home_state.dart';
@@ -27,27 +24,23 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> loadMainData(int categoryId) async {
     emit(HomeLoading());
-    Future.wait([getCategories(), getProducts(categoryId)]);
+    await Future.wait([getCategories(), getProducts(categoryId)]);
   }
 
   Future<void> getCategories() async {
-    var response = await _getCategoriesUseCase.invoke();
-    switch (response) {
-      case SuccessAPI<List<CategoriesResponseEntity>>():
-        emit(GetCategoriesSuccess(categories: response.data!));
-      case ErrorAPI<List<CategoriesResponseEntity>>():
-        emit(HomeError(message: response.messageError));
-    }
+    final response = await _getCategoriesUseCase.invoke();
+    response.fold(
+      (failure) => emit(HomeError(message: failure.failuremessage)),
+      (categories) => emit(GetCategoriesSuccess(categories: categories)),
+    );
   }
 
   Future<void> getProducts(int categoryId) async {
-    var response = await _getProdactsUseCase.invoke(categoryId);
-    switch (response) {
-      case SuccessAPI<List<ProductsResponseEntity>>():
-        emit(GetProductsSuccess(products: response.data!));
-      case ErrorAPI<List<ProductsResponseEntity>>():
-        emit(HomeError(message: response.messageError));
-    }
+    final response = await _getProdactsUseCase.invoke(categoryId);
+    response.fold(
+      (failure) => emit(HomeError(message: failure.failuremessage)),
+      (products) => emit(GetProductsSuccess(products: products)),
+    );
   }
 }
 

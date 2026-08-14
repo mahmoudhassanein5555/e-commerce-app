@@ -2,34 +2,56 @@ import 'package:e_commerce_app/feature/home/domain/entites/category_response_ent
 import 'package:flutter/material.dart';
 
 class TabItemWidget extends StatelessWidget {
-  TabItemWidget({
+  const TabItemWidget({
     super.key,
     required this.category,
     required this.selected,
+    this.onTap,
   });
+
   final CategoriesResponseEntity category;
-  bool selected;
+  final bool selected;
+  final VoidCallback? onTap;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      margin: const EdgeInsets.only(right: 8),
-      decoration: BoxDecoration(
-        color: selected ? const Color(0xff212121) : Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: const Color(0xff212121),
-          width: 1.5,
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(24),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeInOut,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 9),
+        margin: const EdgeInsets.only(right: 10),
+        decoration: BoxDecoration(
+          color: selected ? const Color(0xFF0E1F1A) : Colors.white,
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(
+            color: selected ? const Color(0xFF0E1F1A) : const Color(0xFFE5E7EB),
+            width: 1.2,
+          ),
+          boxShadow: selected
+              ? [
+                  BoxShadow(
+                    color: const Color(0xFF0E1F1A).withValues(alpha: 0.15),
+                    blurRadius: 8,
+                    offset: const Offset(0, 3),
+                  ),
+                ]
+              : null,
         ),
-      ),
-      child: Text(
-        category.name,
-        style: TextStyle(
-          color: selected ? const Color(0xffFEF7FF) : const Color(0xff212121),
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
+        child: Center(
+          child: Text(
+            category.name,
+            style: TextStyle(
+              color: selected ? Colors.white : const Color(0xFF374151),
+              fontSize: 13.5,
+              fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+              letterSpacing: -0.1,
+            ),
+            textAlign: TextAlign.center,
+          ),
         ),
-        textAlign: TextAlign.center,
       ),
     );
   }
