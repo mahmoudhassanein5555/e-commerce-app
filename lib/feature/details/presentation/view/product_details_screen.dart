@@ -2,7 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:e_commerce_app/core/di/service_locator.dart';
 import 'package:e_commerce_app/feature/details/presentation/view_model/home_cubit/product_details_cubit.dart';
 import 'package:e_commerce_app/feature/details/presentation/view_model/home_cubit/product_details_state.dart';
-import 'package:e_commerce_app/feature/cart/cart_cubit.dart';
+import 'package:e_commerce_app/feature/cart/presentation/view_model/home_cubit/product_cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';

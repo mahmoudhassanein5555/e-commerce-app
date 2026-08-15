@@ -24,7 +24,6 @@ class CartCubit extends Cubit<CartState> {
     emit(CartState(items: items));
   }
 
-  /// Adds one unit of a product (merges quantity if the product is already in the cart).
   Future<void> addProductLine({
     required int productId,
     required String title,
