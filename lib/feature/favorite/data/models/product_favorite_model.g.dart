@@ -1,4 +1,10 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
 part of 'product_favorite_model.dart';
+
+// **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
 
 class ProductFavoriteModelAdapter extends TypeAdapter<ProductFavoriteModel> {
   @override

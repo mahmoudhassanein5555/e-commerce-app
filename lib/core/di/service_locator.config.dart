@@ -84,6 +84,7 @@ import '../../feature/home/domain/use_case/get_categories_use_case.dart'
 import '../../feature/home/domain/use_case/get_prodacts_use_case.dart' as _i853;
 import '../../feature/home/presentation/view_model/home_cubit/home_cubit.dart'
     as _i747;
+import '../api/api_manager.dart' as _i1047;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -100,6 +101,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i361.RegisterApi>(() => _i361.RegisterApi());
     gh.factory<_i160.ProductDetailsApi>(() => _i160.ProductDetailsApi());
     gh.factory<_i446.HomeApi>(() => _i446.HomeApi());
+    gh.singleton<_i1047.ApiManager>(() => _i1047.ApiManager());
     gh.lazySingleton<_i334.MainTabCubit>(() => _i334.MainTabCubit());
     gh.factory<_i729.ProductFavoriteDataSource>(
         () => _i363.ProductFavoriteDataSourceImp());
@@ -121,6 +123,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i138.ProductCartRepoImp(gh<_i329.ProductCartDataSource>()));
     gh.factory<_i724.LoginRepo>(
         () => _i916.LoginRepoImp(gh<_i152.LoginDataSource>()));
+    gh.lazySingleton<_i4.CartCubit>(
+        () => _i4.CartCubit(gh<_i380.ProductCartRepo>()));
     gh.factory<_i308.ProductDetailsRepo>(() =>
         _i1071.ProductsDetailsRepoImp(gh<_i887.ProductDetailsDataSource>()));
     gh.factory<_i874.HomeRepo>(
@@ -139,7 +143,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i293.LoginCubit(gh<_i494.LoginUseCase>()));
     gh.factory<_i200.RegisterUseCase>(
         () => _i200.RegisterUseCase(gh<_i582.RegisterRepo>()));
-    gh.factory<_i4.CartCubit>(() => _i4.CartCubit(gh<_i380.ProductCartRepo>()));
     gh.factory<_i377.RegisterCubit>(
         () => _i377.RegisterCubit(gh<_i200.RegisterUseCase>()));
     gh.factory<_i249.ProductDetailsCubit>(
