@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/core/di/service_locator.dart';
+import 'package:e_commerce_app/feature/app_section/main_tab_cubit.dart';
 import 'package:e_commerce_app/feature/details/presentation/view/product_details_screen.dart';
 import 'package:e_commerce_app/feature/home/domain/entites/category_response_entity.dart';
 import 'package:e_commerce_app/feature/home/domain/entites/product_response_entity.dart';
@@ -50,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     children: [
                       TextSpan(
-                        text: 'Let’s start your shopping',
+                        text: '***************************',
                         style: TextStyle(
                           color: Color(0xff212121),
                           fontSize: 20,
@@ -134,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => ProductDetailsScreen(
+                              builder: (context) => ProductDetailsScreen(
                                 productId: product.id,
                               ),
                             ),
@@ -167,6 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           return ProductItemWidget(
                             product: ProductsResponseEntity(),
                             onProductTap: () {},
+                            // onAddToCart: () {},
                           );
                         },
                       ),
