@@ -3,15 +3,15 @@ import 'package:e_commerce_app/feature/home/domain/entites/category_response_ent
 import 'package:e_commerce_app/feature/home/presentation/widgets/tab_item_widget.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class TabContainerWidget extends StatefulWidget {
-  TabContainerWidget({
+  const TabContainerWidget({
     super.key,
     required this.categories,
     this.onTapSelected,
   });
-  Function(int categoryId)? onTapSelected;
+
   final List<CategoriesResponseEntity> categories;
+  final ValueChanged<int>? onTapSelected;
 
   @override
   State<TabContainerWidget> createState() => _TabContainerWidgetState();
@@ -19,35 +19,40 @@ class TabContainerWidget extends StatefulWidget {
 
 class _TabContainerWidgetState extends State<TabContainerWidget> {
   int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: widget.categories.length,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TabBar(
-              isScrollable: true,
-              indicatorColor: Colors.transparent,
-              dividerColor: Colors.transparent,
-              tabAlignment: TabAlignment.start,
-              labelPadding: EdgeInsets.zero,
-              onTap: (int index) {
-                log('Selected tab: ${widget.categories[index].id}');
-                widget.onTapSelected?.call(widget.categories[index].id) ??
-                    () {};
+    if (widget.categories.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return SizedBox(
+      height: 42,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        clipBehavior: Clip.none,
+        itemCount: widget.categories.length,
+        itemBuilder: (context, index) {
+          final category = widget.categories[index];
+          final isSelected = index == currentIndex;
+          return GestureDetector(
+            onTap: () {
+              log('Selected category ID: ${category.id}');
+              if (currentIndex != index) {
                 setState(() {
                   currentIndex = index;
                 });
-              },
-              tabs: List.generate(
-                  widget.categories.length,
-                  (index) => TabItemWidget(
-                      category: widget.categories[index],
-                      selected: index == currentIndex))),
-        ],
+                widget.onTapSelected?.call(category.id);
+              }
+            },
+            child: TabItemWidget(
+              category: category,
+              selected: isSelected,
+            ),
+          );
+        },
       ),
     );
   }
 }
+

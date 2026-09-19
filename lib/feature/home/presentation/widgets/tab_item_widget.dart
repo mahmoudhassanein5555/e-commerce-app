@@ -2,35 +2,39 @@ import 'package:e_commerce_app/feature/home/domain/entites/category_response_ent
 import 'package:flutter/material.dart';
 
 class TabItemWidget extends StatelessWidget {
-  TabItemWidget({
+  const TabItemWidget({
     super.key,
     required this.category,
     required this.selected,
   });
+
   final CategoriesResponseEntity category;
-  bool selected;
+  final bool selected;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      margin: const EdgeInsets.only(right: 8),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      margin: const EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
-        color: selected ? const Color(0xff212121) : Colors.white,
-        borderRadius: BorderRadius.circular(8),
+        color: selected ? const Color(0xFF121212) : Colors.white,
+        borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: const Color(0xff212121),
-          width: 1.5,
+          color: selected ? const Color(0xFF121212) : const Color(0xFFE8E8E8),
+          width: 1.2,
         ),
       ),
       child: Text(
         category.name,
         style: TextStyle(
-          color: selected ? const Color(0xffFEF7FF) : const Color(0xff212121),
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
+          color: selected ? Colors.white : const Color(0xFF121212),
+          fontSize: 14,
+          fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
         ),
         textAlign: TextAlign.center,
       ),
     );
   }
 }
+

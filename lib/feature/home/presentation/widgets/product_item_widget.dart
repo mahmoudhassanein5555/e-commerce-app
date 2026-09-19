@@ -15,6 +15,7 @@ class ProductItemWidget extends StatefulWidget {
   });
   final ProductsResponseEntity product;
   final VoidCallback onProductTap;
+
   static const String imageTest =
       'https://picperf.io/https://laravelnews.s3.amazonaws.com/featured-images/dummy.png';
   @override
@@ -133,7 +134,6 @@ class _ProductItemWidgetState extends State<ProductItemWidget> {
             ],
           ),
         ),
-        const SizedBox(height: 8),
       ],
     );
   }
