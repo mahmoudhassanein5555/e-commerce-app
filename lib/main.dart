@@ -9,6 +9,7 @@ import 'package:e_commerce_app/feature/auth/register/presentation/view/register_
 import 'package:e_commerce_app/feature/favorite/data/models/product_favorite_model.dart';
 import 'package:e_commerce_app/feature/favorite/presentation/view_model/home_cubit/product_favorite_cubit.dart';
 import 'package:e_commerce_app/feature/onboarding/onboarding_screen.dart';
+import 'package:e_commerce_app/feature/search/presentation/view/search_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -28,8 +29,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Ecommerce App",
-      initialRoute: AppSection.routeName,
+      initialRoute: SearchScreen.routeName,
       routes: {
+        SearchScreen.routeName: (context) => const SearchScreen(),
         OnboardingScreen.routeName: (context) => const OnboardingScreen(),
         LoginScreen.routeName: (context) => BlocProvider(
               create: (context) => getIt<LoginCubit>(),

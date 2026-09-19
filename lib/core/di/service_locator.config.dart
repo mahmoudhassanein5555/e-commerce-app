@@ -84,6 +84,14 @@ import '../../feature/home/domain/use_case/get_categories_use_case.dart'
 import '../../feature/home/domain/use_case/get_prodacts_use_case.dart' as _i853;
 import '../../feature/home/presentation/view_model/home_cubit/home_cubit.dart'
     as _i747;
+import '../../feature/search/data/data_source/search_data_source.dart' as _i516;
+import '../../feature/search/data/data_source/search_data_source_imp.dart'
+    as _i459;
+import '../../feature/search/data/repository/search_repo_imp.dart' as _i340;
+import '../../feature/search/domain/repository/search_repo.dart' as _i424;
+import '../../feature/search/domain/use_cases/search_use_case.dart' as _i700;
+import '../../feature/search/presentation/view_model/search_cubit.dart'
+    as _i453;
 import '../api/api_manager.dart' as _i1047;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -107,6 +115,7 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i363.ProductFavoriteDataSourceImp());
     gh.factory<_i887.ProductDetailsDataSource>(
         () => _i769.ProductDetailsDataSourceImp(gh<_i160.ProductDetailsApi>()));
+    gh.factory<_i516.SearchDataSource>(() => _i459.SearchDataSourceImp());
     gh.factory<_i329.ProductCartDataSource>(
         () => _i319.ProductCartDataSourceImp());
     gh.factory<_i1015.ProductFavoriteRepo>(() =>
@@ -129,6 +138,8 @@ extension GetItInjectableX on _i174.GetIt {
         _i1071.ProductsDetailsRepoImp(gh<_i887.ProductDetailsDataSource>()));
     gh.factory<_i874.HomeRepo>(
         () => _i1031.HomeRepoImp(gh<_i1059.HomeDataSource>()));
+    gh.factory<_i424.SearchRepo>(
+        () => _i340.SearchRepoImp(gh<_i516.SearchDataSource>()));
     gh.factory<_i461.GetProductDetailsUseCase>(
         () => _i461.GetProductDetailsUseCase(gh<_i308.ProductDetailsRepo>()));
     gh.factory<_i582.RegisterRepo>(
@@ -141,6 +152,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i494.LoginUseCase(gh<_i724.LoginRepo>()));
     gh.factory<_i293.LoginCubit>(
         () => _i293.LoginCubit(gh<_i494.LoginUseCase>()));
+    gh.factory<_i700.SearchUseCase>(
+        () => _i700.SearchUseCase(gh<_i424.SearchRepo>()));
     gh.factory<_i200.RegisterUseCase>(
         () => _i200.RegisterUseCase(gh<_i582.RegisterRepo>()));
     gh.factory<_i377.RegisterCubit>(
@@ -151,6 +164,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i283.GetCategoriesUseCase>(),
           gh<_i853.GetProdactsUseCase>(),
         ));
+    gh.factory<_i453.SearchCubit>(
+        () => _i453.SearchCubit(gh<_i700.SearchUseCase>()));
     return this;
   }
 }
