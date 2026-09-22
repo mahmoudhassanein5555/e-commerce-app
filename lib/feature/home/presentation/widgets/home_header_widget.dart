@@ -1,193 +1,219 @@
+import 'package:e_commerce_app/core/utils/app_colors.dart';
+import 'package:e_commerce_app/core/utils/app_strings.dart';
+import 'package:e_commerce_app/core/utils/app_text_style.dart';
+import 'package:e_commerce_app/feature/home/presentation/widgets/editors_pick_banner_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeHeaderWidget extends StatelessWidget {
-  const HomeHeaderWidget({super.key});
+  const HomeHeaderWidget({
+    super.key,
+    this.onNotificationTap,
+    this.onLocationTap,
+    this.onSearchTap,
+    this.onExploreTap,
+  });
+
+  final VoidCallback? onNotificationTap;
+  final VoidCallback? onLocationTap;
+  final VoidCallback? onSearchTap;
+  final VoidCallback? onExploreTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color(0xFFD4A359),
-            Color(0xFFC79549),
-            Color(0xFFB88536),
-          ],
-        ),
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(32),
-          bottomRight: Radius.circular(32),
-        ),
-      ),
-      child: SafeArea(
-        bottom: false,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Top Bar: Greeting & Notification
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Stack(
+      clipBehavior: Clip.none,
+      alignment: Alignment.bottomCenter,
+      children: [
+        // 1. Golden Header Container with gradient background
+        Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                AppColors.primaryGoldStart,
+                AppColors.primaryGoldMiddle1,
+                AppColors.primaryGoldMiddle2,
+                AppColors.primaryGoldEnd,
+              ],
+            ),
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(32.r),
+              bottomRight: Radius.circular(32.r),
+            ),
+          ),
+          child: SafeArea(
+            bottom: false,
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 80.h),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'GOOD MORNING',
-                        style: TextStyle(
-                          color: Colors.white.withValues(alpha: 0.85),
-                          fontSize: 10,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1.5,
+                  // Top Greeting & Notification Bell Row
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppStrings.goodMorning,
+                              style: AppTextStyle.greeting,
+                            ),
+                            SizedBox(height: 2.h),
+                            Text(
+                              AppStrings.brandName,
+                              style: AppTextStyle.brandTitle,
+                            ),
+                          ],
                         ),
-                      ),
-                      const SizedBox(height: 2),
-                      const Text(
-                        'Lumière.',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 32,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'serif',
-                          letterSpacing: 0.2,
+                        InkWell(
+                          onTap: onNotificationTap,
+                          borderRadius: BorderRadius.circular(24.r),
+                          child: Container(
+                            width: 44.w,
+                            height: 44.w,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.white.withValues(alpha: 0.22),
+                              border: Border.all(
+                                color: AppColors.white.withValues(alpha: 0.35),
+                                width: 1.2.w,
+                              ),
+                            ),
+                            child: Center(
+                              child: Icon(
+                                Icons.notifications_none_rounded,
+                                color: AppColors.white,
+                                size: 22.sp,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  Stack(
-                    children: [
-                      Container(
-                        width: 44,
-                        height: 44,
+
+                  SizedBox(height: 14.h),
+
+                  // Deliver to Location Pill
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4.w),
+                    child: InkWell(
+                      onTap: onLocationTap,
+                      borderRadius: BorderRadius.circular(20.r),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 12.w,
+                          vertical: 6.h,
+                        ),
                         decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.2),
-                          shape: BoxShape.circle,
+                          color: Colors.black.withValues(alpha: 0.16),
+                          borderRadius: BorderRadius.circular(20.r),
                           border: Border.all(
-                            color: Colors.white.withValues(alpha: 0.3),
-                            width: 1,
+                            color: AppColors.white.withValues(alpha: 0.15),
+                            width: 0.8.w,
                           ),
                         ),
-                        child: IconButton(
-                          padding: EdgeInsets.zero,
-                          icon: const Icon(
-                            Icons.notifications_none_rounded,
-                            color: Colors.white,
-                            size: 22,
-                          ),
-                          onPressed: () {},
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.location_on_outlined,
+                              color: AppColors.white.withValues(alpha: 0.95),
+                              size: 14.sp,
+                            ),
+                            SizedBox(width: 5.w),
+                            Text(
+                              AppStrings.deliverToLocation,
+                              style: AppTextStyle.deliverToLocation,
+                            ),
+                            SizedBox(width: 4.w),
+                            Icon(
+                              Icons.chevron_right_rounded,
+                              color: AppColors.white.withValues(alpha: 0.75),
+                              size: 16.sp,
+                            ),
+                          ],
                         ),
                       ),
-                      Positioned(
-                        top: 10,
-                        right: 12,
-                        child: Container(
-                          width: 8,
-                          height: 8,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFFF4D068),
-                            shape: BoxShape.circle,
-                          ),
+                    ),
+                  ),
+
+                  SizedBox(height: 16.h),
+
+                  // Search Bar inside Header above the Banner
+                  InkWell(
+                    onTap: onSearchTap,
+                    borderRadius: BorderRadius.circular(28.r),
+                    child: Container(
+                      height: 50.h,
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      decoration: BoxDecoration(
+                        color: AppColors.white.withValues(alpha: 0.18),
+                        borderRadius: BorderRadius.circular(28.r),
+                        border: Border.all(
+                          color: AppColors.white.withValues(alpha: 0.42),
+                          width: 1.2.w,
                         ),
                       ),
-                    ],
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.search_rounded,
+                            color: AppColors.white.withValues(alpha: 0.88),
+                            size: 22.sp,
+                          ),
+                          SizedBox(width: 10.w),
+                          Expanded(
+                            child: Text(
+                              AppStrings.searchHint,
+                              style: AppTextStyle.searchHint,
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8.w,
+                              vertical: 3.5.h,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColors.white.withValues(alpha: 0.24),
+                              borderRadius: BorderRadius.circular(6.r),
+                              border: Border.all(
+                                color: AppColors.white.withValues(alpha: 0.38),
+                                width: 0.8.w,
+                              ),
+                            ),
+                            child: Text(
+                              AppStrings.searchShortcut,
+                              style: AppTextStyle.searchShortcut,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
-
-              // Location Pill
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  color: Colors.black.withValues(alpha: 0.18),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.15),
-                    width: 1,
-                  ),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.location_on_outlined,
-                      color: Colors.white.withValues(alpha: 0.9),
-                      size: 15,
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
-                      'Deliver to Paris, FR  ›',
-                      style: TextStyle(
-                        color: Colors.white.withValues(alpha: 0.95),
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 18),
-
-              // Search Field
-              Container(
-                height: 48,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.22),
-                  borderRadius: BorderRadius.circular(24),
-                  border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.35),
-                    width: 1,
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.search_rounded,
-                      color: Colors.white.withValues(alpha: 0.85),
-                      size: 20,
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        'Search the maison...',
-                        style: TextStyle(
-                          color: Colors.white.withValues(alpha: 0.85),
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        '⌘K',
-                        style: TextStyle(
-                          color: Colors.white.withValues(alpha: 0.75),
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
         ),
-      ),
+
+        // 2. Overlapping EditorsPickBannerWidget
+        Positioned(
+          bottom: -80.h,
+          left: 16.w,
+          right: 16.w,
+          child: EditorsPickBannerWidget(
+            onExploreTap: onExploreTap,
+          ),
+        ),
+      ],
     );
   }
 }
-
-

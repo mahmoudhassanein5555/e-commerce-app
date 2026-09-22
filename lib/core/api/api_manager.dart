@@ -52,10 +52,8 @@ class ApiManager {
       queryParameters: queryParameters,
       options: (options ?? Options()).copyWith(
         headers: {
-          ...dio
-              .options
-              .headers, // يدمج الـ Headers الأساسية لدايو (Accept و Content-Type)
-          ...?headers, // يضيف عليها الـ Headers الخاصة بالريكويست ده لو موجودة
+          ...dio.options.headers,
+          ...?headers,
         },
       ),
     );
