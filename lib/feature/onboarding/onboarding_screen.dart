@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:e_commerce_app/feature/auth/login/presentation/view/login_screen.dart';
+import 'package:e_commerce_app/core/routes/routes_names.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -107,7 +108,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       curve: Curves.easeIn,
                     );
                   } else {
-                    Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                    context.goNamed(Routes.login);
                   }
                 },
                 color: const Color(0xff212121),

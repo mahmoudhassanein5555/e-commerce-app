@@ -4,6 +4,7 @@ import 'package:e_commerce_app/feature/cart/presentation/view_model/home_cubit/p
 import 'package:e_commerce_app/feature/cart/presentation/view_model/home_cubit/product_cart_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -22,7 +23,7 @@ class CartScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
         ),
       ),
       body: BlocBuilder<CartCubit, CartState>(

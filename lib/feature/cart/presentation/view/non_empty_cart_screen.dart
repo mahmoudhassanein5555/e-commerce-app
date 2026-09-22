@@ -1,9 +1,12 @@
+import 'package:e_commerce_app/core/routes/routes_names.dart';
 import 'package:e_commerce_app/feature/cart/presentation/view_model/home_cubit/product_cart_cubit.dart';
 import 'package:e_commerce_app/feature/cart/presentation/view_model/home_cubit/product_cart_state.dart';
 import 'package:e_commerce_app/feature/cart/presentation/widgets/cart_item_widget.dart';
 import 'package:e_commerce_app/feature/checkout/presentation/view/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class NonEmptyCartScreen extends StatelessWidget {
   const NonEmptyCartScreen({super.key});
@@ -41,7 +44,7 @@ class NonEmptyCartScreen extends StatelessWidget {
                     height: 52,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, CheckoutScreen.routeName);
+                        context.pushNamed(Routes.checkout);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,

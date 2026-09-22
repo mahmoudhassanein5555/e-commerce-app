@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SearchBarWidget extends StatelessWidget {
   final TextEditingController? controller;
@@ -25,8 +26,8 @@ class SearchBarWidget extends StatelessWidget {
           onTap: () {
             if (onBackTap != null) {
               onBackTap!();
-            } else if (Navigator.canPop(context)) {
-              Navigator.pop(context);
+            } else if (context.canPop()) {
+              context.pop();
             }
           },
           child: Container(

@@ -5,10 +5,12 @@ import 'package:e_commerce_app/core/utils/validator_functions.dart';
 import 'package:e_commerce_app/feature/auth/register/domain/entites/reques_entites/register_request_entites.dart';
 import 'package:e_commerce_app/feature/auth/register/presentation/view_model/home_cubit/register_cubit.dart';
 import 'package:e_commerce_app/feature/auth/register/presentation/view_model/home_cubit/register_state.dart';
-import 'package:e_commerce_app/feature/auth/login/presentation/view/login_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:e_commerce_app/core/routes/routes_names.dart';
 import 'package:toastification/toastification.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -61,11 +63,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: BlocListener<RegisterCubit, RegisterState>(
         listener: (context, state) {
           if (state is RegisterSuccess) {
-            Navigator.pop(context);
-            Navigator.pushNamed(context, LoginScreen.routeName);
+            context.pop();
+            context.pushNamed(Routes.login);
           }
           if (state is RegisterError) {
-            Navigator.pop(context);
+            context.pop();
             AppToast.showToast(
                 context: context,
                 title: "Error",
@@ -186,7 +188,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      Navigator.of(context).pushNamed(LoginScreen.routeName);
+                      context.pushNamed(Routes.login);
                     },
                   children: const [
                     TextSpan(

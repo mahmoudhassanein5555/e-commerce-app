@@ -2,13 +2,13 @@ import 'package:e_commerce_app/core/common/widget/custom_form_text_fiel.dart';
 import 'package:e_commerce_app/core/dialogs/app_dialogs.dart';
 import 'package:e_commerce_app/core/dialogs/app_toasts.dart';
 import 'package:e_commerce_app/core/utils/validator_functions.dart';
-import 'package:e_commerce_app/feature/app_section/app_section.dart';
+import 'package:e_commerce_app/core/routes/routes_names.dart';
 import 'package:e_commerce_app/feature/auth/login/presentation/view_model/home_cubit/login_cubit.dart';
 import 'package:e_commerce_app/feature/auth/login/presentation/view_model/home_cubit/login_state.dart';
-import 'package:e_commerce_app/feature/auth/register/presentation/view/register_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:toastification/toastification.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -58,10 +58,10 @@ class _LoginScreenState extends State<LoginScreen> {
           if (state is LoginLoading) {
             AppDialogs.showLoadingDialog(context);
           } else if (state is LoginSuccess) {
-            Navigator.pop(context);
-            Navigator.pushNamed(context, AppSection.routeName);
+            context.pop();
+            context.pushNamed(Routes.appSection);
           } else if (state is LoginError) {
-            Navigator.pop(context);
+            context.pop();
             AppToast.showToast(
                 context: context,
                 title: "Error",
@@ -147,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      Navigator.of(context).pushNamed(RegisterScreen.routeName);
+                      context.pushNamed(Routes.register);
                     },
                   children: const [
                     TextSpan(

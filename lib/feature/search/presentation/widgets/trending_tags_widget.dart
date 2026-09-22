@@ -73,4 +73,3 @@ class TrendingTagsWidget extends StatelessWidget {
     );
   }
 }
-

@@ -1,6 +1,6 @@
 import 'package:e_commerce_app/feature/favorite/data/models/product_favorite_model.dart';
 import 'package:e_commerce_app/feature/favorite/domain/repositories/data_source/product_favorite_data_source.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: ProductFavoriteDataSource)

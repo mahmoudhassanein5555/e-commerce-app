@@ -1,8 +1,8 @@
 import 'package:e_commerce_app/feature/home/data/models/categories_response_dto.dart';
 import 'package:e_commerce_app/feature/home/domain/entites/category_response_entity.dart';
 import 'package:e_commerce_app/feature/home/domain/entites/product_response_entity.dart';
-import 'package:hive/hive.dart';
-
+import 'package:hive_ce/hive.dart';
+part 'products_response_dto.g.dart';
 @HiveType(typeId: 1)
 class ProductsResponseDto {
   @HiveField(0)

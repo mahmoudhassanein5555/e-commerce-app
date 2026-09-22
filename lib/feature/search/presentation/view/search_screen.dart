@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/core/di/service_locator.dart';
+import 'package:e_commerce_app/core/routes/routes_names.dart';
 import 'package:e_commerce_app/feature/details/presentation/view/product_details_screen.dart';
 import 'package:e_commerce_app/feature/search/presentation/view_model/search_cubit.dart';
 import 'package:e_commerce_app/feature/search/presentation/view_model/search_state.dart';
@@ -7,6 +8,7 @@ import 'package:e_commerce_app/feature/search/presentation/widgets/search_produc
 import 'package:e_commerce_app/feature/search/presentation/widgets/trending_tags_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class SearchScreen extends StatefulWidget {
   static const String routeName = 'SearchScreen';
@@ -196,17 +198,12 @@ class _SearchScreenState extends State<SearchScreen> {
                                         thumbnailBgColor:
                                             _getThumbnailColor(index),
                                         onTap: () {
-                                          if (product.id > 0) {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ProductDetailsScreen(
-                                                  productId: product.id,
-                                                ),
-                                              ),
-                                            );
-                                          }
+                                            if (product.id > 0) {
+                                              context.pushNamed(
+                                                Routes.productDetails,
+                                                pathParameters: {'id': product.id.toString()},
+                                              );
+                                            }
                                         },
                                       );
                                     },
@@ -234,8 +231,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                           ),
                                           const SizedBox(height: 12),
                                           TextButton(
-                                            onPressed: () => _searchCubit.search(
-                                                _searchController.text),
+                                            onPressed: () => _searchCubit
+                                                .search(_searchController.text),
                                             child: const Text(
                                               'Retry',
                                               style: TextStyle(
@@ -263,190 +260,47 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
 
                   // Floating Chat Action Button
-                  Positioned(
-                    right: 20,
-                    bottom: 85,
-                    child: Container(
-                      width: 46,
-                      height: 46,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF1C251D),
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.15),
-                            blurRadius: 10,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          const Icon(
-                            Icons.chat_bubble_rounded,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                          Positioned(
-                            top: 10,
-                            right: 10,
-                            child: Container(
-                              width: 6,
-                              height: 6,
-                              decoration: const BoxDecoration(
-                                color: Color(0xFFC59B27),
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  // Capsule Floating Bottom Navigation Bar
-                  Positioned(
-                    left: 20,
-                    right: 20,
-                    bottom: 16,
-                    child: Container(
-                      height: 56,
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.95),
-                        borderRadius: BorderRadius.circular(35),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.06),
-                            blurRadius: 16,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // Home Icon
-                          IconButton(
-                            icon: const Icon(
-                              Icons.home_outlined,
-                              color: Color(0xFF869788),
-                              size: 22,
-                            ),
-                            onPressed: () {
-                              if (Navigator.canPop(context)) {
-                                Navigator.pop(context);
-                              }
-                            },
-                          ),
-
-                          // Search Icon (Active Circle)
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: const BoxDecoration(
-                              color: Color(0xFF1C251D),
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.search_rounded,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-
-                          // Cart Icon with Badge
-                          Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.shopping_bag_outlined,
-                                  color: Color(0xFF869788),
-                                  size: 22,
-                                ),
-                                onPressed: () {},
-                              ),
-                              Positioned(
-                                top: 8,
-                                right: 8,
-                                child: Container(
-                                  padding: const EdgeInsets.all(3),
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xFFC59B27),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 12,
-                                    minHeight: 12,
-                                  ),
-                                  child: const Text(
-                                    '1',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 8,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          // Favorite Icon with Badge
-                          Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.favorite_border_rounded,
-                                  color: Color(0xFF869788),
-                                  size: 22,
-                                ),
-                                onPressed: () {},
-                              ),
-                              Positioned(
-                                top: 8,
-                                right: 8,
-                                child: Container(
-                                  padding: const EdgeInsets.all(3),
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xFFC59B27),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 12,
-                                    minHeight: 12,
-                                  ),
-                                  child: const Text(
-                                    '1',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 8,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          // Profile Icon
-                          IconButton(
-                            icon: const Icon(
-                              Icons.person_outline_rounded,
-                              color: Color(0xFF869788),
-                              size: 22,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // Positioned(
+                  //   right: 20,
+                  //   bottom: 85,
+                  //   child: Container(
+                  //     width: 46,
+                  //     height: 46,
+                  //     decoration: BoxDecoration(
+                  //       color: const Color(0xFF1C251D),
+                  //       shape: BoxShape.circle,
+                  //       boxShadow: [
+                  //         BoxShadow(
+                  //           color: Colors.black.withValues(alpha: 0.15),
+                  //           blurRadius: 10,
+                  //           offset: const Offset(0, 4),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //     child: Stack(
+                  //       alignment: Alignment.center,
+                  //       children: [
+                  //         const Icon(
+                  //           Icons.chat_bubble_rounded,
+                  //           color: Colors.white,
+                  //           size: 20,
+                  //         ),
+                  //         Positioned(
+                  //           top: 10,
+                  //           right: 10,
+                  //           child: Container(
+                  //             width: 6,
+                  //             height: 6,
+                  //             decoration: const BoxDecoration(
+                  //               color: Color(0xFFC59B27),
+                  //               shape: BoxShape.circle,
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -456,4 +310,3 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 }
-

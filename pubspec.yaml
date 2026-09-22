@@ -4,7 +4,7 @@ publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.0.0 <4.0.0" # تم التحديث لدعم Flutter 3.x و Null Safety
+  sdk: ">=3.0.0 <4.0.0" 
 
 dependencies:
   flutter:
@@ -17,7 +17,7 @@ dependencies:
 
   # Networking & Data
   http: ^1.6.0
-  dio: ^5.7.0
+  dio: ^5.11.0
   pretty_dio_logger: ^1.4.0
   shared_preferences: ^2.2.2
   equatable: ^2.0.5
@@ -30,6 +30,7 @@ dependencies:
   animate_do: ^3.3.4
   toastification: ^2.0.0
   responsive_builder: ^0.7.1
+  line_icons: ^2.0.3
 
   # State Management
   provider: ^6.1.2
@@ -41,12 +42,14 @@ dependencies:
   cached_network_image: ^3.4.1
   marquee: ^2.3.0
   dots_indicator: ^4.0.1
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
-  pretty_dio_logger: ^1.4.0
-  dio: ^5.11.0
+  
+  hive_ce: ^2.5.0
+  hive_ce_flutter: ^1.1.0
+  
   dartz: ^0.10.1
   flutter_screenutil: ^5.9.3
+  google_nav_bar: ^5.0.7
+  go_router: ^18.0.1
 
 dev_dependencies:
   flutter_test:
@@ -54,12 +57,11 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   injectable_generator: ^2.10.0
 
-  # Codegen: hive_generator_io works with current build_runner / analyzer (hive_generator is unmaintained).
-  # Regenerate: flutter pub run build_runner build --delete-conflicting-outputs --force-aot
-  # (or: dart run build_runner ...). --force-aot avoids missing `frontend_server.dart.snapshot` on Dart 3.11+.
   build_runner: ^2.4.15
   frontend_server_client: ^4.0.0
-  hive_generator_io: ^3.2.2
+  
+  # Hive CE Generator
+  hive_ce_generator: ^1.8.0
 
 flutter:
   uses-material-design: true

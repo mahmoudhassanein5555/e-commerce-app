@@ -1,6 +1,6 @@
 import 'package:e_commerce_app/feature/cart/data/models/product_cart_model.dart';
 import 'package:e_commerce_app/feature/cart/domain/repositories/data_source/product_cart_data_source.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: ProductCartDataSource)
