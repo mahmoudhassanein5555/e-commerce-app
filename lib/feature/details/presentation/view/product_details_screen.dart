@@ -38,13 +38,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   final state = _productDetailsCubit.state;
                   if (state is GetProductsDetailsSuccess) {
                     context.read<CartCubit>().addProductLine(
-                      productId: state.productDetails.id,
-                      title: state.productDetails.title,
-                      imageUrl: state.productDetails.images.isNotEmpty
-                          ? state.productDetails.images[0]
-                          : CartCubit.fallbackImageUrl,
-                      price: state.productDetails.price.toString(),
-                    );
+                          productId: state.productDetails.id,
+                          title: state.productDetails.title,
+                          imageUrl: state.productDetails.images.isNotEmpty
+                              ? state.productDetails.images[0]
+                              : CartCubit.fallbackImageUrl,
+                          price: state.productDetails.price.toString(),
+                        );
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -143,7 +143,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           color: Colors.red, size: 60),
                       const SizedBox(height: 16),
                       Text(
-                        state.message, 
+                        state.message,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w500),
@@ -151,8 +151,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       const SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () {
-                          _productDetailsCubit
-                              .intent(GetProductDetails(productId: widget.productId));
+                          _productDetailsCubit.intent(
+                              GetProductDetails(productId: widget.productId));
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.teal),
@@ -228,4 +228,3 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ));
   }
 }
-

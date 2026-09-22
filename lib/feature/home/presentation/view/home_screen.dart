@@ -92,20 +92,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         enabled: true,
                         enableSwitchAnimation: true,
                         child: SizedBox(
-                          height: 50,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 10,
-                            itemBuilder: (BuildContext context, int index) {
-                              return TabContainerWidget(
-                                  categories: List.generate(
-                                6,
-                                (index) => const CategoriesResponseEntity(
-                                    name: "Loading"),
-                              ));
-                            },
-                          ),
-                        ),
+                            height: 50,
+                            child: TabContainerWidget(
+                                categories: List.generate(
+                              4,
+                              (index) => const CategoriesResponseEntity(
+                                  name: "Loading"),
+                            ))),
                       );
                     }
                   },

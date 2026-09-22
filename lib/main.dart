@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Ecommerce App",
-      initialRoute: SearchScreen.routeName,
+      initialRoute: AppSection.routeName,
       routes: {
         SearchScreen.routeName: (context) => const SearchScreen(),
         OnboardingScreen.routeName: (context) => const OnboardingScreen(),

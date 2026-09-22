@@ -27,7 +27,7 @@ class _TabContainerWidgetState extends State<TabContainerWidget> {
     }
 
     return SizedBox(
-      height: 42,
+      height: 60,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         clipBehavior: Clip.none,
@@ -55,4 +55,3 @@ class _TabContainerWidgetState extends State<TabContainerWidget> {
     );
   }
 }
-
