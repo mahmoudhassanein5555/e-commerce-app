@@ -3,6 +3,7 @@ import 'package:e_commerce_app/core/routes/app_router.dart';
 import 'package:e_commerce_app/core/utils/app_strings.dart';
 import 'package:e_commerce_app/feature/app_section/main_tab_cubit.dart';
 import 'package:e_commerce_app/feature/auth/register/presentation/view_model/home_cubit/register_cubit.dart';
+import 'package:e_commerce_app/feature/cart/data/models/product_cart_model.dart';
 import 'package:e_commerce_app/feature/cart/presentation/view_model/home_cubit/product_cart_cubit.dart';
 import 'package:e_commerce_app/feature/favorite/data/models/product_favorite_model.dart';
 import 'package:e_commerce_app/feature/favorite/presentation/view_model/home_cubit/product_favorite_cubit.dart';
@@ -27,6 +28,7 @@ Future<void> main() async {
   Hive.registerAdapter(
     ProductFavoriteModelAdapter() as TypeAdapter<dynamic>,
   );
+  Hive.registerAdapter(ProductCartModelAdapter());
 
   configureDependencies();
 

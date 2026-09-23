@@ -12,97 +12,125 @@ class FavoriteItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(40),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withValues(alpha: 0.2),
+            color: Colors.green.withOpacity(0.05),
             spreadRadius: 2,
-            blurRadius: 5,
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
         ],
+        border: Border.all(color: Colors.green.withOpacity(0.1), width: 1),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(15)),
-                child: Image.network(
-                  product.image,
-                  height: 150,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) =>
-                      const Icon(Icons.broken_image, size: 50),
-                ),
-              ),
-              Positioned(
-                top: 5,
-                right: 5,
-                child: IconButton(
-                  onPressed: () {
-                    context.read<FavoriteCubit>().toggleFavorite(product);
-                  },
-                  icon: const Icon(
-                    Icons.favorite,
-                    size: 30,
-                    color: Color.fromARGB(255, 171, 18, 7),
-                  ),
-                ),
-              ),
-            ],
+          Container(
+            width: 100,
+            height: 100,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: Image.network(
+              product.image,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) =>
+                  const Icon(Icons.broken_image, size: 40),
+            ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const SizedBox(width: 16),
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
+                  product.title.split(' ').first.toUpperCase(),
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
                   product.title,
-                  maxLines: 1,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 14),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  "EGP ${product.price}",
-                  style: const TextStyle(
-                    color: Color.fromARGB(255, 171, 18, 7),
                     fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
                 ),
                 const SizedBox(height: 8),
-                SizedBox(
-                  width: double.infinity,
-                  height: 34,
-                  child: FilledButton(
-                    style: FilledButton.styleFrom(
-                      backgroundColor: const Color(0xff212121),
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      textStyle: const TextStyle(
-                        fontSize: 12,
+                Row(
+                  children: const [
+                    Icon(Icons.star, color: Color(0xFFC59A55), size: 16),
+                    SizedBox(width: 4),
+                    Text(
+                      "4.9",
+                      style: TextStyle(
                         fontWeight: FontWeight.w600,
+                        fontSize: 12,
                       ),
                     ),
-                    onPressed: () {
-                      context.read<CartCubit>().addProductLine(
-                        productId: product.productId ?? 0,
-                        title: product.title,
-                        imageUrl: product.image,
-                        price: product.price,
-                      );
-                    },
-                    child: const Text('Add to cart'),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "\$${product.price}",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
                   ),
                 ),
               ],
             ),
+          ),
+          const SizedBox(width: 8),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () {
+                  context.read<CartCubit>().addProductLine(
+                    productId: product.productId ?? 0,
+                    title: product.title,
+                    imageUrl: product.image,
+                    price: product.price,
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF0D1C17),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.shopping_bag_outlined,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              InkWell(
+                onTap: () {
+                  context.read<FavoriteCubit>().toggleFavorite(product);
+                },
+                child: const Icon(
+                  Icons.favorite,
+                  color: Color(0xFFC59A55),
+                  size: 24,
+                ),
+              ),
+            ],
           ),
         ],
       ),

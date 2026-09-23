@@ -1,7 +1,10 @@
 import 'package:e_commerce_app/core/utils/app_colors.dart';
+import 'package:e_commerce_app/feature/cart/presentation/view/product_cart_screen.dart';
 import 'package:e_commerce_app/feature/favorite/presentation/view/product_favorite_screen.dart';
 import 'package:e_commerce_app/feature/home/presentation/view/home_screen.dart';
 import 'package:e_commerce_app/feature/profile/view/profile_screen.dart';
+import 'package:e_commerce_app/feature/search/presentation/view/search_screen.dart';
+import 'package:e_commerce_app/feature/cart/presentation/view/cart_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
@@ -20,7 +23,9 @@ class _AppSectionState extends State<AppSection> {
     HomeScreen(),
     // const CartScreen(),
     FavoriteScreen(),
-    ProfileScreen(),
+    CartScreen(),
+
+    SearchScreen(),
     ProfileScreen(),
   ];
 
@@ -72,6 +77,10 @@ class _AppSectionState extends State<AppSection> {
                   text: 'Likes',
                 ),
                 GButton(
+                  icon: LineIcons.shoppingCart,
+                  text: 'Cart',
+                ),
+                GButton(
                   icon: LineIcons.search,
                   text: 'Search',
                 ),
@@ -82,9 +91,21 @@ class _AppSectionState extends State<AppSection> {
               ],
               selectedIndex: _selectedIndex,
               onTabChange: (index) {
-                setState(() {
-                  _selectedIndex = index;
-                });
+                if (index == 2) {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    builder: (context) => const CartBottomSheet(),
+                  ).whenComplete(() {
+                    // Re-render to ensure GNav snaps back to the actual _selectedIndex
+                    setState(() {});
+                  });
+                } else {
+                  setState(() {
+                    _selectedIndex = index;
+                  });
+                }
               },
             ),
           ),

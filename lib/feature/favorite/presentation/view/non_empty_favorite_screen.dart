@@ -12,15 +12,10 @@ class NonEmptyFavoriteScreen extends StatelessWidget {
     return BlocBuilder<FavoriteCubit, FavoriteState>(
       builder: (context, state) {
         final favorites = context.read<FavoriteCubit>().favoritesList;
-        return GridView.builder(
-          padding: const EdgeInsets.all(16),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 0.58,
-            crossAxisSpacing: 15,
-            mainAxisSpacing: 15,
-          ),
+        return ListView.separated(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           itemCount: favorites.length,
+          separatorBuilder: (context, index) => const SizedBox(height: 16),
           itemBuilder: (context, index) {
             return FavoriteItemWidget(product: favorites[index]);
           },

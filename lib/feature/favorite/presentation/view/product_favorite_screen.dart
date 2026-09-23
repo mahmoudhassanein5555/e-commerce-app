@@ -12,28 +12,70 @@ class FavoriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text("My Favourite",
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-        centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () => context.pop(),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
+          child: InkWell(
+            onTap: () => context.pop(),
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.arrow_back_ios_new, color: Colors.black, size: 16),
+            ),
+          ),
+        ),
+        centerTitle: true,
+        title: const Column(
+          children: [
+            Text(
+              "SAVED",
+              style: TextStyle(
+                color: Color(0xFFC59A55),
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 2.0,
+              ),
+            ),
+            Text(
+              "Your wishlist",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
       ),
-      body: BlocBuilder<FavoriteCubit, FavoriteState>(
-        builder: (context, state) {
-          final cubit = context.read<FavoriteCubit>();
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFFE5F8E6),
+              Color(0xFFFEF6E4),
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: BlocBuilder<FavoriteCubit, FavoriteState>(
+            builder: (context, state) {
+              final cubit = context.read<FavoriteCubit>();
 
-          if (cubit.favoritesList.isEmpty) {
-            return const EmptyFavoriteScreen();
-          } else {
-            return const NonEmptyFavoriteScreen();
-          }
-        },
+              if (cubit.favoritesList.isEmpty) {
+                return const EmptyFavoriteScreen();
+              } else {
+                return const NonEmptyFavoriteScreen();
+              }
+            },
+          ),
+        ),
       ),
     );
   }
