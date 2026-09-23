@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:e_commerce_app/core/di/service_locator.dart';
 import 'package:e_commerce_app/core/routes/routes_names.dart';
+import 'package:e_commerce_app/feature/chat/presentation/view/chat_screen.dart';
+import 'package:e_commerce_app/feature/chat/presentation/view_model/chat_cubit.dart';
 import 'package:e_commerce_app/feature/app_section/app_section.dart';
 import 'package:e_commerce_app/feature/auth/login/presentation/view/login_screen.dart';
 import 'package:e_commerce_app/feature/auth/login/presentation/view_model/home_cubit/login_cubit.dart';
@@ -63,6 +65,22 @@ class AppRouter {
         builder: (context, state) {
           final id = int.tryParse(state.pathParameters['id'] ?? '0') ?? 0;
           return ProductDetailsScreen(productId: id);
+        },
+      ),
+      GoRoute(
+        path: Routes.chat,
+        name: Routes.chat,
+        builder: (context, state) {
+          // Providing default dummy data if not passed. In a real app,
+          // these could be passed via state.extra or fetched from a local cache/auth state.
+          final extra = state.extra as Map<String, dynamic>? ?? {};
+          final userId = extra['userId'] ?? 'user_12345';
+          final userName = extra['userName'] ?? 'Guest User';
+          
+          return BlocProvider(
+            create: (context) => getIt<ChatCubit>(),
+            child: ChatScreen(userId: userId, userName: userName),
+          );
         },
       ),
     ],

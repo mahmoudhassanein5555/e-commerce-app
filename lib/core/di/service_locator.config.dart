@@ -49,6 +49,11 @@ import '../../feature/cart/domain/repositories/repo/product_cart_repo.dart'
     as _i380;
 import '../../feature/cart/presentation/view_model/home_cubit/product_cart_cubit.dart'
     as _i4;
+import '../../feature/chat/data/repository/chat_repository.dart' as _i425;
+import '../../feature/chat/domain/repositories/repo/chat_repo.dart' as _i514;
+import '../../feature/chat/domain/use_case/get_messages_use_case.dart' as _i42;
+import '../../feature/chat/domain/use_case/send_message_use_case.dart' as _i540;
+import '../../feature/chat/presentation/view_model/chat_cubit.dart' as _i170;
 import '../../feature/details/data/api/details_api.dart' as _i160;
 import '../../feature/details/data/repositories/data_sources_imp/product_details_data_source_imp.dart'
     as _i769;
@@ -114,6 +119,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i887.ProductDetailsDataSource>(
         () => _i769.ProductDetailsDataSourceImp(gh<_i160.ProductDetailsApi>()));
     gh.factory<_i516.SearchDataSource>(() => _i459.SearchDataSourceImp());
+    gh.factory<_i425.ChatRepository>(() => _i425.ChatRepositoryImpl());
     gh.lazySingleton<_i932.NetworkInfo>(() => _i932.NetworkInfoImpl());
     gh.factory<_i329.ProductCartDataSource>(
         () => _i319.ProductCartDataSourceImp());
@@ -131,12 +137,18 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i138.ProductCartRepoImp(gh<_i329.ProductCartDataSource>()));
     gh.factory<_i724.LoginRepo>(
         () => _i916.LoginRepoImp(gh<_i152.LoginDataSource>()));
+    gh.factory<_i42.GetMessagesUseCase>(
+        () => _i42.GetMessagesUseCase(gh<_i514.ChatRepo>()));
+    gh.factory<_i540.SendMessageUseCase>(
+        () => _i540.SendMessageUseCase(gh<_i514.ChatRepo>()));
     gh.factory<_i874.HomeRepo>(() => _i185.HomeRepoImpl(
           gh<_i424.HomeDataSource>(),
           gh<_i932.NetworkInfo>(),
         ));
     gh.lazySingleton<_i4.CartCubit>(
         () => _i4.CartCubit(gh<_i380.ProductCartRepo>()));
+    gh.factory<_i170.ChatCubit>(
+        () => _i170.ChatCubit(gh<_i425.ChatRepository>()));
     gh.factory<_i308.ProductDetailsRepo>(() =>
         _i1071.ProductsDetailsRepoImp(gh<_i887.ProductDetailsDataSource>()));
     gh.factory<_i424.SearchRepo>(

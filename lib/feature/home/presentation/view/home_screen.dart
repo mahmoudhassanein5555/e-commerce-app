@@ -196,17 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
             right: 16.w,
             child: HomeFloatingChatButton(
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: const Text(AppStrings.maisonConciergeMessage),
-                    duration: const Duration(seconds: 2),
-                    behavior: SnackBarBehavior.floating,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.r),
-                    ),
-                    backgroundColor: AppColors.darkBackground,
-                  ),
-                );
+                context.pushNamed(Routes.chat);
               },
             ),
           ),

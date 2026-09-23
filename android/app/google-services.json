@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "600306558218",
+    "project_id": "swiftbuy-54d7a",
+    "storage_bucket": "swiftbuy-54d7a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600306558218:android:9e1ef5243b1659aefdc6f3",
+        "android_client_info": {
+          "package_name": "com.example.e_commerce_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-eH-i5NgitUTVTesSdMvpGQ8uvQUnzIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
