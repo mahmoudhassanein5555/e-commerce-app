@@ -107,6 +107,13 @@ import '../../feature/search/presentation/view_model/search_cubit.dart'
     as _i453;
 import '../api/api_manager.dart' as _i1047;
 import '../network/network_info.dart' as _i932;
+import '../../feature/auth/login/presentation/view_model/home_cubit/secure_storage_service.dart' as _i990;
+import '../../feature/profile/data/data_sources/profile_remote_data_source.dart' as _i991;
+import '../../feature/profile/data/repositories/profile_repository_impl.dart' as _i992;
+import '../../feature/profile/domain/repositories/profile_repository.dart' as _i993;
+import '../../feature/profile/domain/use_cases/get_profile_use_case.dart' as _i994;
+import '../../feature/profile/domain/use_cases/update_profile_use_case.dart' as _i995;
+import '../../feature/profile/presentation/view_model/profile_cubit.dart' as _i996;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -124,6 +131,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i160.ProductDetailsApi>(() => _i160.ProductDetailsApi());
     gh.singleton<_i1047.ApiManager>(() => _i1047.ApiManager());
     gh.lazySingleton<_i334.MainTabCubit>(() => _i334.MainTabCubit());
+    gh.lazySingleton<_i990.SecureStorageService>(() => _i990.SecureStorageService());
+    gh.factory<_i991.ProfileRemoteDataSource>(
+        () => _i991.ProfileRemoteDataSourceImpl(gh<_i990.SecureStorageService>()));
+    gh.factory<_i993.ProfileRepository>(
+        () => _i992.ProfileRepositoryImpl(gh<_i991.ProfileRemoteDataSource>()));
+    gh.factory<_i994.GetProfileUseCase>(
+        () => _i994.GetProfileUseCase(gh<_i993.ProfileRepository>()));
+    gh.factory<_i995.UpdateProfileUseCase>(
+        () => _i995.UpdateProfileUseCase(gh<_i993.ProfileRepository>()));
+    gh.factory<_i996.ProfileCubit>(() => _i996.ProfileCubit(
+          gh<_i994.GetProfileUseCase>(),
+          gh<_i995.UpdateProfileUseCase>(),
+          gh<_i990.SecureStorageService>(),
+        ));
     gh.factory<_i729.ProductFavoriteDataSource>(
         () => _i363.ProductFavoriteDataSourceImp());
     gh.factory<_i458.RegisterDataSource>(
