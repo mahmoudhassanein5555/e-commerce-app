@@ -28,7 +28,7 @@ import '../../feature/auth/login/presentation/view_model/home_cubit/login_cubit.
     as _i293;
 import '../../feature/auth/register/data/api/register_api.dart' as _i361;
 import '../../feature/auth/register/data/repositories/data_source/register_data_source_imp.dart'
-    as _i334;
+    as _i335;
 import '../../feature/auth/register/data/repositories/repo/register_repo_imp.dart'
     as _i508;
 import '../../feature/auth/register/domain/repositories/data_source/register_data_source.dart'
@@ -87,11 +87,21 @@ import '../../feature/home/domain/use_case/get_categories_use_case.dart'
 import '../../feature/home/domain/use_case/get_prodacts_use_case.dart' as _i853;
 import '../../feature/home/presentation/view_model/home_cubit/home_cubit.dart'
     as _i747;
+import '../../feature/payment/data/data_source/payment_data_source.dart'
+    as _i517;
+import '../../feature/payment/data/data_source/payment_data_source_imp.dart'
+    as _i43;
+import '../../feature/payment/data/repository/payment_repo_imp.dart' as _i74;
+import '../../feature/payment/domain/repository/payment_repo.dart' as _i861;
+import '../../feature/payment/domain/use_case/get_payment_url_use_case.dart'
+    as _i962;
+import '../../feature/payment/presentation/view_model/payment_cubit.dart'
+    as _i928;
 import '../../feature/search/data/data_source/search_data_source.dart' as _i516;
 import '../../feature/search/data/data_source/search_data_source_imp.dart'
     as _i459;
 import '../../feature/search/data/repository/search_repo_imp.dart' as _i340;
-import '../../feature/search/domain/repository/search_repo.dart' as _i424;
+import '../../feature/search/domain/repository/search_repo.dart' as _i426;
 import '../../feature/search/domain/use_cases/search_use_case.dart' as _i700;
 import '../../feature/search/presentation/view_model/search_cubit.dart'
     as _i453;
@@ -116,69 +126,77 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i334.MainTabCubit>(() => _i334.MainTabCubit());
     gh.factory<_i729.ProductFavoriteDataSource>(
         () => _i363.ProductFavoriteDataSourceImp());
-    gh.factory<_i887.ProductDetailsDataSource>(
-        () => _i769.ProductDetailsDataSourceImp(gh<_i160.ProductDetailsApi>()));
+    gh.factory<_i458.RegisterDataSource>(
+        () => _i335.RegisterDataSourceImp(gh<_i361.RegisterApi>()));
     gh.factory<_i516.SearchDataSource>(() => _i459.SearchDataSourceImp());
     gh.factory<_i425.ChatRepository>(() => _i425.ChatRepositoryImpl());
     gh.lazySingleton<_i932.NetworkInfo>(() => _i932.NetworkInfoImpl());
     gh.factory<_i329.ProductCartDataSource>(
         () => _i319.ProductCartDataSourceImp());
-    gh.factory<_i1015.ProductFavoriteRepo>(() =>
-        _i38.ProductFavoriteRepoImp(gh<_i729.ProductFavoriteDataSource>()));
     gh.factory<_i424.HomeDataSource>(
         () => _i930.HomeDataSourceImpl(gh<_i1047.ApiManager>()));
-    gh.factory<_i353.FavoriteCubit>(
-        () => _i353.FavoriteCubit(gh<_i1015.ProductFavoriteRepo>()));
     gh.factory<_i152.LoginDataSource>(
         () => _i165.LoginDataSourceImp(gh<_i889.LoginApi>()));
-    gh.factory<_i458.RegisterDataSource>(
-        () => _i334.RegisterDataSourceImp(gh<_i361.RegisterApi>()));
-    gh.factory<_i380.ProductCartRepo>(
-        () => _i138.ProductCartRepoImp(gh<_i329.ProductCartDataSource>()));
-    gh.factory<_i724.LoginRepo>(
-        () => _i916.LoginRepoImp(gh<_i152.LoginDataSource>()));
+    gh.factory<_i1015.ProductFavoriteRepo>(() =>
+        _i38.ProductFavoriteRepoImp(gh<_i729.ProductFavoriteDataSource>()));
     gh.factory<_i42.GetMessagesUseCase>(
         () => _i42.GetMessagesUseCase(gh<_i514.ChatRepo>()));
     gh.factory<_i540.SendMessageUseCase>(
         () => _i540.SendMessageUseCase(gh<_i514.ChatRepo>()));
+    gh.factory<_i380.ProductCartRepo>(
+        () => _i138.ProductCartRepoImp(gh<_i329.ProductCartDataSource>()));
+    gh.lazySingleton<_i517.PaymentDataSource>(
+        () => _i43.PaymentDataSourceImp());
     gh.factory<_i874.HomeRepo>(() => _i185.HomeRepoImpl(
           gh<_i424.HomeDataSource>(),
           gh<_i932.NetworkInfo>(),
         ));
-    gh.lazySingleton<_i4.CartCubit>(
-        () => _i4.CartCubit(gh<_i380.ProductCartRepo>()));
-    gh.factory<_i170.ChatCubit>(
-        () => _i170.ChatCubit(gh<_i425.ChatRepository>()));
-    gh.factory<_i308.ProductDetailsRepo>(() =>
-        _i1071.ProductsDetailsRepoImp(gh<_i887.ProductDetailsDataSource>()));
-    gh.factory<_i424.SearchRepo>(
-        () => _i340.SearchRepoImp(gh<_i516.SearchDataSource>()));
-    gh.factory<_i461.GetProductDetailsUseCase>(
-        () => _i461.GetProductDetailsUseCase(gh<_i308.ProductDetailsRepo>()));
     gh.factory<_i582.RegisterRepo>(
         () => _i508.RegisterRepoImp(gh<_i458.RegisterDataSource>()));
-    gh.factory<_i283.GetCategoriesUseCase>(
-        () => _i283.GetCategoriesUseCase(gh<_i874.HomeRepo>()));
-    gh.factory<_i853.GetProdactsUseCase>(
-        () => _i853.GetProdactsUseCase(gh<_i874.HomeRepo>()));
-    gh.factory<_i494.LoginUseCase>(
-        () => _i494.LoginUseCase(gh<_i724.LoginRepo>()));
-    gh.factory<_i293.LoginCubit>(
-        () => _i293.LoginCubit(gh<_i494.LoginUseCase>()));
-    gh.factory<_i700.SearchUseCase>(
-        () => _i700.SearchUseCase(gh<_i424.SearchRepo>()));
+    gh.factory<_i887.ProductDetailsDataSource>(
+        () => _i769.ProductDetailsDataSourceImp(gh<_i160.ProductDetailsApi>()));
+    gh.factory<_i724.LoginRepo>(
+        () => _i916.LoginRepoImp(gh<_i152.LoginDataSource>()));
     gh.factory<_i200.RegisterUseCase>(
         () => _i200.RegisterUseCase(gh<_i582.RegisterRepo>()));
     gh.factory<_i377.RegisterCubit>(
         () => _i377.RegisterCubit(gh<_i200.RegisterUseCase>()));
+    gh.lazySingleton<_i4.CartCubit>(
+        () => _i4.CartCubit(gh<_i380.ProductCartRepo>()));
+    gh.factory<_i170.ChatCubit>(
+        () => _i170.ChatCubit(gh<_i425.ChatRepository>()));
+    gh.factory<_i426.SearchRepo>(
+        () => _i340.SearchRepoImp(gh<_i516.SearchDataSource>()));
+    gh.factory<_i700.SearchUseCase>(
+        () => _i700.SearchUseCase(gh<_i426.SearchRepo>()));
+    gh.factory<_i494.LoginUseCase>(
+        () => _i494.LoginUseCase(gh<_i724.LoginRepo>()));
+    gh.factory<_i353.FavoriteCubit>(
+        () => _i353.FavoriteCubit(gh<_i1015.ProductFavoriteRepo>()));
+    gh.factory<_i453.SearchCubit>(
+        () => _i453.SearchCubit(gh<_i700.SearchUseCase>()));
+    gh.factory<_i308.ProductDetailsRepo>(() =>
+        _i1071.ProductsDetailsRepoImp(gh<_i887.ProductDetailsDataSource>()));
+    gh.lazySingleton<_i861.PaymentRepo>(
+        () => _i74.PaymentRepoImp(gh<_i517.PaymentDataSource>()));
+    gh.factory<_i283.GetCategoriesUseCase>(
+        () => _i283.GetCategoriesUseCase(gh<_i874.HomeRepo>()));
+    gh.factory<_i853.GetProdactsUseCase>(
+        () => _i853.GetProdactsUseCase(gh<_i874.HomeRepo>()));
+    gh.factory<_i461.GetProductDetailsUseCase>(
+        () => _i461.GetProductDetailsUseCase(gh<_i308.ProductDetailsRepo>()));
     gh.factory<_i249.ProductDetailsCubit>(
         () => _i249.ProductDetailsCubit(gh<_i461.GetProductDetailsUseCase>()));
+    gh.factory<_i293.LoginCubit>(
+        () => _i293.LoginCubit(gh<_i494.LoginUseCase>()));
+    gh.lazySingleton<_i962.GetPaymentUrlUseCase>(
+        () => _i962.GetPaymentUrlUseCase(gh<_i861.PaymentRepo>()));
+    gh.factory<_i928.PaymentCubit>(
+        () => _i928.PaymentCubit(gh<_i962.GetPaymentUrlUseCase>()));
     gh.factory<_i747.HomeCubit>(() => _i747.HomeCubit(
           gh<_i283.GetCategoriesUseCase>(),
           gh<_i853.GetProdactsUseCase>(),
         ));
-    gh.factory<_i453.SearchCubit>(
-        () => _i453.SearchCubit(gh<_i700.SearchUseCase>()));
     return this;
   }
 }

@@ -12,7 +12,9 @@ import 'package:e_commerce_app/feature/auth/login/presentation/view/login_screen
 import 'package:e_commerce_app/feature/auth/login/presentation/view_model/home_cubit/login_cubit.dart';
 import 'package:e_commerce_app/feature/auth/register/presentation/view/register_screen.dart';
 import 'package:e_commerce_app/feature/auth/register/presentation/view_model/home_cubit/register_cubit.dart';
+import 'package:e_commerce_app/feature/payment/presentation/view_model/payment_cubit.dart';
 import 'package:e_commerce_app/feature/checkout/presentation/view/checkout_screen.dart';
+import 'package:e_commerce_app/feature/payment/presentation/view/payment_webview_screen.dart';
 import 'package:e_commerce_app/feature/details/presentation/view/product_details_screen.dart';
 import 'package:e_commerce_app/feature/onboarding/onboarding_screen.dart';
 
@@ -57,7 +59,10 @@ class AppRouter {
       GoRoute(
         path: Routes.checkout,
         name: Routes.checkout,
-        builder: (context, state) => const CheckoutScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<PaymentCubit>(),
+          child: const CheckoutScreen(),
+        ),
       ),
       GoRoute(
         path: Routes.productDetails,
@@ -81,6 +86,15 @@ class AppRouter {
             create: (context) => getIt<ChatCubit>(),
             child: ChatScreen(userId: userId, userName: userName),
           );
+        },
+      ),
+      GoRoute(
+        path: Routes.paymentWebView,
+        name: Routes.paymentWebView,
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>? ?? {};
+          final url = extra['url'] as String? ?? 'https://stripe.com';
+          return PaymentWebViewScreen(paymentUrl: url);
         },
       ),
     ],

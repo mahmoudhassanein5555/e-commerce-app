@@ -7,4 +7,5 @@ class Routes {
   static const String checkout = '/checkout';
   static const String productDetails = '/product_details/:id';
   static const String chat = '/chat';
+  static const String paymentWebView = '/paymentWebView';
 }

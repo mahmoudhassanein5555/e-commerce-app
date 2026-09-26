@@ -16,6 +16,7 @@ class AppColors {
   static const Color darkButton = Color(0xFF091813);
   static const Color darkTabSelected = Color(0xFF0E1F1A);
   static const Color white = Colors.white;
+  static const Color black = Colors.black;
   static const Color transparent = Colors.transparent;
 
   // Surface & Banner Colors

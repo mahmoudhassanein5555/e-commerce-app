@@ -35,4 +35,10 @@ class AppStrings {
   static const String tryAgain = 'Try Again';
   static const String maisonConciergeMessage =
       'Maison Concierge at your service.';
+
+  // Payment
+  static const String paymentTitle = 'Payment';
+  static const String paymobIframeUrl =
+      'https://accept.paymob.com/api/acceptance/iframes/';
+  static const String defaultIframeId = '1080860';
 }

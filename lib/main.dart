@@ -7,6 +7,7 @@ import 'package:e_commerce_app/feature/cart/data/models/product_cart_model.dart'
 import 'package:e_commerce_app/feature/cart/presentation/view_model/home_cubit/product_cart_cubit.dart';
 import 'package:e_commerce_app/feature/favorite/data/models/product_favorite_model.dart';
 import 'package:e_commerce_app/feature/favorite/presentation/view_model/home_cubit/product_favorite_cubit.dart';
+import 'package:e_commerce_app/feature/payment/presentation/view_model/payment_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (context) => getIt<CartCubit>(),
             ),
+            
           ],
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,
