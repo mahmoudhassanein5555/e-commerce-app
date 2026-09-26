@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/core/di/service_locator.dart';
+// import 'package:e_commerce_app/core/di/service_locator.dart';
 import 'package:e_commerce_app/core/routes/routes_names.dart';
 import 'package:e_commerce_app/feature/details/presentation/view/product_details_screen.dart';
 import 'package:e_commerce_app/feature/search/presentation/view_model/search_cubit.dart';
@@ -20,7 +20,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  late final SearchCubit _searchCubit;
+  // Removed _searchCubit manual initialization
   late final TextEditingController _searchController;
 
   static const List<Color> _thumbnailColors = [
@@ -33,15 +33,13 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
-    _searchCubit = getIt<SearchCubit>();
     _searchController = TextEditingController();
-    _searchCubit.search('');
+    context.read<SearchCubit>().search('');
   }
 
   @override
   void dispose() {
     _searchController.dispose();
-    _searchCubit.close();
     super.dispose();
   }
 
@@ -104,7 +102,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             // Top Bar: Back Button, Search Field & Options
                             SearchBarWidget(
                               controller: _searchController,
-                              onChanged: (query) => _searchCubit.search(query),
+                              onChanged: (query) => context.read<SearchCubit>().search(query),
                             ),
                             const SizedBox(height: 22),
 
@@ -112,7 +110,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             TrendingTagsWidget(
                               onTagTap: (tag) {
                                 _searchController.text = tag;
-                                _searchCubit.search(tag);
+                                context.read<SearchCubit>().search(tag);
                               },
                             ),
                             const SizedBox(height: 24),
@@ -131,7 +129,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
                             // Dynamic Search Results / Browse Products
                             BlocBuilder<SearchCubit, SearchState>(
-                              bloc: _searchCubit,
                               builder: (context, state) {
                                 final double availableHeight =
                                     (constraints.maxHeight - 320)
@@ -231,7 +228,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                           ),
                                           const SizedBox(height: 12),
                                           TextButton(
-                                            onPressed: () => _searchCubit
+                                            onPressed: () => context.read<SearchCubit>()
                                                 .search(_searchController.text),
                                             child: const Text(
                                               'Retry',
